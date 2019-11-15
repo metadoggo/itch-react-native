@@ -1,6 +1,9 @@
-import {CALCULATE_SUCCESS, MOVE_RESULT_TO_TOP} from '../actionTypes/calculation';
+import {
+  CALCULATE_SUCCESS,
+  MOVE_RESULT_TO_TOP,
+} from '../actionTypes/calculation';
 
-export default function (state = [], action) {
+export default function(state = [], action) {
   switch (action.type) {
     case CALCULATE_SUCCESS:
       return [action.data, ...state];
@@ -12,4 +15,4 @@ export default function (state = [], action) {
     default:
       return state;
   }
-};
+}
