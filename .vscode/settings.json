@@ -1,0 +1,11 @@
+{
+    "react-native.android.runArguments.device": [
+        "--appIdSuffix=dev"
+    ],
+    "search.exclude": {
+        "**/.vscode": true
+    },
+    "files.exclude": {
+        "**/node_modules/**": true
+    },
+}
