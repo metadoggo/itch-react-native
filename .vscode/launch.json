@@ -9,7 +9,9 @@
             "cwd": "${workspaceFolder}",
             "type": "reactnative",
             "request": "launch",
-            "platform": "android"
+            "platform": "android",
+            "variant": "devDebug",
+            "target": "device"
         },
         {
             "name": "iOS",

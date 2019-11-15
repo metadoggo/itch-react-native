@@ -1,6 +1,11 @@
 {
     "react-native.android.runArguments.device": [
-        "--appIdSuffix=dev"
+        "--appId=com.su93rheroes.itch.dev",
+        "--variant=devDebug"
+    ],
+    "react-native.android.runArguments.simulator": [
+        "--appId=com.su93rheroes.itch.dev",
+        "--variant=devDebug"
     ],
     "search.exclude": {
         "**/.vscode": true
