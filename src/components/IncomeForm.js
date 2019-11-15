@@ -189,6 +189,8 @@ const styles = StyleSheet.create({
   container: {
     paddingLeft: 50,
     paddingRight: 50,
+    paddingTop: 60,
+    paddingBottom: 100,
   },
   countrySelectorButton: {
     justifyContent: 'center',
@@ -216,7 +218,8 @@ const styles = StyleSheet.create({
   },
   flag: {
     fontSize: 64,
-    width: 64,
+    width: 100,
+    textAlign: 'center',
   },
   tick: {
     fontSize: 18,

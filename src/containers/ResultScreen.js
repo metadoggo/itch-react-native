@@ -7,7 +7,7 @@ import {Dimensions, StyleSheet, View} from 'react-native';
 import {createAction} from '../actions';
 import {WALLPAPER_LOAD_REQUEST} from '../actionTypes/wallpaper';
 
-const {width: viewportWidth, height: viewportHeight} = Dimensions.get('window');
+const {width: viewportWidth} = Dimensions.get('window');
 
 const sliderWidth = Math.round(viewportWidth * 1);
 const itemHorizontalMargin = Math.round(viewportWidth * 0);
@@ -43,24 +43,14 @@ function ResultScreen({results, wallpaper}) {
           itemWidth={itemWidth}
           onSnapToItem={setActiveSliderNum}
         />
-        <View style={styles.footer}>
-          <Pagination
-            dotsLength={results.length}
-            activeDotIndex={activeSliderNum}
-            containerStyle={styles.paginationContainer}
-            dotColor="#000"
-            dotStyle={styles.paginationDot}
-            inactiveDotColor="#000"
-            inactiveDotOpacity={0.4}
-            inactiveDotScale={0.5}
-            carouselRef={carousel}
-            tappableDots={!!carousel}
-          />
-        </View>
       </View>
     );
   }
 }
+
+ResultScreen.navigationOptions = {
+  title: 'Results',
+};
 
 ResultScreen.propType = {
   results: PropTypes.arrayOf(
@@ -97,8 +87,5 @@ const styles = StyleSheet.create({
     height: 16,
     borderRadius: 4,
     marginHorizontal: 8,
-  },
-  footer: {
-    height: 60,
   },
 });

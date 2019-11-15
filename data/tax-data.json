@@ -2,6 +2,8 @@
 	{
 		"title": "England, Wales & Northen Ireland",
 		"flag": "🇬🇧",
+		"prefix": "£",
+		"precision": 2,
 		"locale": "en-GB",
 		"currency": "GBP",
 		"years": [
@@ -93,6 +95,8 @@
 	{
 		"title": "Scotland",
 		"flag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+		"prefix": "£",
+		"precision": 2,
 		"locale": "en-GB",
 		"currency": "GBP",
 		"years": [
@@ -146,6 +150,8 @@
 	{
 		"title": "Singapore",
 		"flag": "🇸🇬",
+		"prefix": "$",
+		"precision": 2,
 		"locale": "en-SG",
 		"currency": "SGD",
 		"years": [
@@ -207,6 +213,8 @@
 	{
 		"title": "Australia",
 		"flag": "🇦🇺",
+		"prefix": "$",
+		"precision": 2,
 		"locale": "en-AU",
 		"currency": "AUD",
 		"years": [
@@ -256,6 +264,8 @@
 	{
 		"title": "Vietnam",
 		"flag": "🇻🇳",
+		"suffix": " ₫",
+		"precision": 0,
 		"locale": "vi-VN",
 		"currency": "VND",
 		"years": [

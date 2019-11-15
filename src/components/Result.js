@@ -3,7 +3,18 @@ import PropTypes from 'prop-types';
 import {View, ScrollView, Text, StyleSheet, Animated} from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-const taxSummer = (total, item) => total + item.amount;
+const sepThou = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+const sepNum = (number, precision = 0) => {
+  const int = number | 0; // eslint-disable-line no-bitwise
+  if (precision === 0) {
+    return {int: sepThou(int), float: ''};
+  }
+  const float = ((number - int) * Math.pow(10, precision)) | 0; // eslint-disable-line no-bitwise
+  return {
+    int: sepThou(int),
+    float: '.' + ('0' + float).substr(-precision),
+  };
+};
 
 export const Result = ({
   params,
@@ -11,23 +22,17 @@ export const Result = ({
   deductions,
   backgroundImageUrl,
 }) => {
-  const formatNumber = number => {
-    if (isNaN(number)) return '';
-    return number.toLocaleString(params.country.locale, {
-      maxSignificantDigits: 1,
-    });
-  };
-  const formatCurrency = amount => {
-    if (isNaN(amount)) return '';
-    return amount.toLocaleString(params.country.locale, {
-      style: 'currency',
-      currency: params.country.currency,
-    });
-  };
-
   const daysWorkedPerYear = params.daysPerWeek * 52 - params.annualLeave;
-  const totalDeductions = deductions.reduce(taxSummer, 0);
+  let totalDeductions = 9;
+  const taxes = {};
+  for (const k in deductions) {
+    const d = deductions[k];
+    totalDeductions += d;
+    taxes[k] = sepNum(d, params.country.precision);
+  }
   const net = grossAnnualIncome - totalDeductions;
+  const dailyRateBeforeTax = grossAnnualIncome / daysWorkedPerYear;
+  const dailyRateAfterTax = net / daysWorkedPerYear;
   const hoursWorkedPerYear = daysWorkedPerYear * params.hoursPerDay;
   const hourlyRateBeforeTax = grossAnnualIncome / hoursWorkedPerYear;
   const hourlyRateAfterTax = net / hoursWorkedPerYear;
@@ -39,6 +44,24 @@ export const Result = ({
       duration: 600,
       useNativeDriver: true,
     }).start();
+
+  const numbers = {
+    'Hours per day': sepNum(params.hoursPerDay, 1),
+    'Days per week': sepNum(params.daysPerWeek, 1),
+    'Annual leave': sepNum(params.annualLeave, 1),
+    'Annual working days': sepNum(daysWorkedPerYear, 1),
+    'Annual working hours': sepNum(hoursWorkedPerYear, 1),
+  };
+
+  const monies = {
+    'Gross annual income': sepNum(grossAnnualIncome, params.country.precision),
+    'Real annual income': sepNum(net, params.country.precision),
+    'Daily rate': sepNum(dailyRateBeforeTax, params.country.precision),
+    'Real daily rate': sepNum(dailyRateAfterTax, params.country.precision),
+    'Hourly rate': sepNum(hourlyRateBeforeTax, params.country.precision),
+    'Real hourly rate': sepNum(hourlyRateAfterTax, params.country.precision),
+    Deductions: sepNum(totalDeductions, params.country.precision),
+  };
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={{flexGrow: 1}}>
@@ -65,58 +88,37 @@ export const Result = ({
         <View style={styles.titleHolder}>
           <Text style={styles.subtitle}>{params.variant.title}</Text>
         </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Hours per day</Text>
-          <Text style={styles.label}>{formatNumber(params.hoursPerDay)}</Text>
-        </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Days per week</Text>
-          <Text style={styles.label}>{formatNumber(params.daysPerWeek)}</Text>
-        </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Leave</Text>
-          <Text style={styles.label}>{formatNumber(params.annualLeave)}</Text>
-        </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Days worked in year</Text>
-          <Text style={styles.label}>{formatNumber(daysWorkedPerYear)}</Text>
-        </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Hours worked in year</Text>
-          <Text style={styles.label}>{formatNumber(hoursWorkedPerYear)}</Text>
-        </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Annual Income</Text>
-          <Text style={styles.label}>{formatCurrency(grossAnnualIncome)}</Text>
-        </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Income after deductions</Text>
-          <Text style={styles.label}>{formatCurrency(net)}</Text>
-        </View>
-        {deductions.map(tax => (
-          <View style={styles.row} key={tax.title}>
-            <Text style={styles.label}>{tax.title}</Text>
-            <Text style={styles.label}>{formatCurrency(tax.amount)}</Text>
+        {Object.keys(numbers).map(label => (
+          <View style={styles.row} key={label}>
+            <Text style={styles.label}>{label}</Text>
+            <Text style={styles.label}>
+              {numbers[label].int}
+              <Text style={styles.float}>{numbers[label].float}</Text>
+            </Text>
           </View>
         ))}
-        {/* <View style={styles.row}>
-        <Text style={styles.label}>Student Loan</Text>
-        <Text style={styles.label}>{formatCurrency(studentLoan)}</Text>
-      </View> */}
-        <View style={styles.row}>
-          <Text style={styles.label}>Total deductions</Text>
-          <Text style={styles.label}>{formatCurrency(totalDeductions)}</Text>
-        </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Hourly rate before deductions</Text>
-          <Text style={styles.label}>
-            {formatCurrency(hourlyRateBeforeTax)}
-          </Text>
-        </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Hourly rate after deductions</Text>
-          <Text style={styles.label}>{formatCurrency(hourlyRateAfterTax)}</Text>
-        </View>
+        {Object.keys(monies).map(label => (
+          <View style={styles.row} key={label}>
+            <Text style={styles.label}>{label}</Text>
+            <Text style={styles.label}>
+              <Text style={styles.currency}>{params.country.prefix || ''}</Text>
+              {monies[label].int}
+              <Text style={styles.float}>{monies[label].float}</Text>
+              <Text style={styles.currency}>{params.country.suffix || ''}</Text>
+            </Text>
+          </View>
+        ))}
+        {Object.keys(taxes).map(label => (
+          <View style={styles.row} key={label}>
+            <Text style={styles.label}> - {label}</Text>
+            <Text style={styles.label}>
+              <Text style={styles.currency}>{params.country.prefix || ''}</Text>
+              {taxes[label].int}
+              <Text style={styles.float}>{taxes[label].float}</Text>
+              <Text style={styles.currency}>{params.country.suffix || ''}</Text>
+            </Text>
+          </View>
+        ))}
       </View>
     </ScrollView>
   );
@@ -141,6 +143,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingLeft: 20,
     paddingRight: 20,
+    paddingBottom: 60,
   },
   backgroundImageHolder: {
     position: 'absolute',
@@ -194,5 +197,11 @@ const styles = StyleSheet.create({
     marginTop: 5,
     textAlign: 'center',
     backgroundColor: 'white',
+  },
+  float: {
+    color: '#666',
+  },
+  currency: {
+    color: '#666',
   },
 });

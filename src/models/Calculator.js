@@ -55,7 +55,7 @@ const normailizeBands = (bands, multiplier) =>
 export const getDeductions = (taxData, annualIncome) => {
   // const studentLoan = repayStudentLoan ? getStudentLoan(gross) : 0;
 
-  const deductions = [];
+  const deductions = {};
   for (let i = 0; i < taxData.categories.length; i++) {
     const cat = taxData.categories[i];
     let bands;
@@ -69,10 +69,7 @@ export const getDeductions = (taxData, annualIncome) => {
       default:
         bands = cat.bands;
     }
-    deductions.push({
-      title: cat.title,
-      amount: getIncomeTax(bands, annualIncome),
-    });
+    deductions[cat.title] = getIncomeTax(bands, annualIncome);
   }
   return deductions;
 };
