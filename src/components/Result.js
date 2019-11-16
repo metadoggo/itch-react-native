@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {View, ScrollView, Text, StyleSheet, Animated} from 'react-native';
 import FastImage from 'react-native-fast-image';
+import {TextButton} from 'react-native-material-buttons';
 
 const sepThou = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 const sepNum = (number, precision = 0) => {
@@ -119,6 +120,13 @@ export const Result = ({
             </Text>
           </View>
         ))}
+        <View style={styles.buttonHolder}>
+          <TextButton
+            title="Delete"
+            titleColor="#fff"
+            titleStyle={{backgroundColor: '#900'}}
+          />
+        </View>
       </View>
     </ScrollView>
   );
@@ -203,5 +211,11 @@ const styles = StyleSheet.create({
   },
   currency: {
     color: '#666',
+  },
+  buttonHolder: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    paddingTop: 20,
   },
 });

@@ -7,7 +7,6 @@ import auth from '@react-native-firebase/auth';
 export default function*() {
   const ch = eventChannel(emit =>
     auth().onAuthStateChanged(async user => {
-      console.log(user);
       if (user) {
         return emit(user);
       }
