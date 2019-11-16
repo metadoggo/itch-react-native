@@ -9,12 +9,14 @@
 import React from 'react';
 import 'react-native-gesture-handler';
 import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
+import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer from '../reducers';
 import rootSagas from '../sagas';
+import Icon from 'react-native-vector-icons/Feather';
+Icon.loadFont();
 
 import FormScreen from '../containers/FormScreen';
 import ResultScreen from '../containers/ResultScreen';
@@ -23,15 +25,20 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(rootSagas);
 
-const RootStack = createStackNavigator(
+const RootStack = createMaterialBottomTabNavigator(
   {
     Form: FormScreen,
     Result: ResultScreen,
   },
   {
     initialRouteName: 'Form',
+    backBehavior: 'initialRoute',
+    order: ['Form', 'Result'],
+    activeColor: 'black',
+    labeled: false,
   },
 );
+
 const AppContainer = createAppContainer(RootStack);
 
 export default () => (

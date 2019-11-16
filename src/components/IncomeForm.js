@@ -173,7 +173,7 @@ export default function IncomeForm({onSubmit, taxData}) {
       <View>
         <RaisedTextButton
           title="Calculate"
-          color={'#00BCD4'}
+          color={'#FF9800'}
           onPress={onPress}
         />
       </View>

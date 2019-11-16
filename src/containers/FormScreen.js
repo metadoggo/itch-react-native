@@ -7,6 +7,7 @@ import {Alerter} from '../components/Alerter';
 import {CALCULATE_REQUEST} from '../actionTypes/calculation';
 import {createAction} from '../actions';
 import taxData from '../../data/tax-data.json';
+import Icon from 'react-native-vector-icons/dist/Feather';
 
 export default function FormScreen({navigation}) {
   const dispatch = useDispatch();
@@ -33,4 +34,8 @@ export default function FormScreen({navigation}) {
 
 FormScreen.navigationOptions = {
   title: 'Income Tax Calculator by Huy',
+  tabBarLabel: 'Calculator',
+  tabBarIcon: <Icon name="edit-3" size={30} color="#fff" />,
+  tabBarColor: '#03A9F4',
+  shifting: true,
 };
