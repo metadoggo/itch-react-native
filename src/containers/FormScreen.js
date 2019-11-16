@@ -35,7 +35,7 @@ export default function FormScreen({navigation}) {
 FormScreen.navigationOptions = {
   title: 'Income Tax Calculator by Huy',
   tabBarLabel: 'Calculator',
-  tabBarIcon: <Icon name="edit-3" size={30} color="#fff" />,
+  tabBarIcon: <Icon name="edit-3" size={28} color="#fff" />,
   tabBarColor: '#03A9F4',
   shifting: true,
 };

@@ -60,7 +60,7 @@ function ResultScreen({results, wallpaper, navigation}) {
 
 ResultScreen.navigationOptions = ({navigation}) => ({
   title: 'Results',
-  tabBarIcon: <Icon name="file-text" size={30} color="#ddd" />,
+  tabBarIcon: <Icon name="file-text" size={28} color="#ddd" />,
   tabBarColor: '#009688',
   shifting: true,
   tabBarBadge: navigation.state.params && navigation.state.params.badge,
