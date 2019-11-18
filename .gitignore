@@ -61,4 +61,5 @@ buck-out/
 # VSCode
 .vscode/.react/
 GoogleService-Info*.plist
+google-services.json
 .env.*

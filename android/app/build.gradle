@@ -83,8 +83,8 @@ project.ext.react = [
 apply from: "../../node_modules/react-native/react.gradle"
 
 project.ext.envConfigFiles = [
-        debug: ".env.com.su83rheroes.itch.dev",
-        prod : ".env.com.su83rheroes.itch",
+        dev: ".env.com.su93rheroes.itch.dev",
+        prod : ".env.com.su93rheroes.itch",
 ]
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
@@ -238,3 +238,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+apply plugin: 'com.google.gms.google-services'

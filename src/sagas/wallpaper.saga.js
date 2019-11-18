@@ -20,7 +20,7 @@ function* handler(action) {
       .catch(error => {
         console.log(error);
       });
-    if (data.errors) {
+    if (data && data.errors) {
       console.log(data.errors);
       return;
     }

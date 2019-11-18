@@ -6,6 +6,7 @@ import Carousel from 'react-native-snap-carousel';
 import {Dimensions, StyleSheet, View, Text} from 'react-native';
 import {createAction} from '../actions';
 import {WALLPAPER_LOAD_REQUEST} from '../actionTypes/wallpaper';
+import {CALCULATION_DELETE_REQUEST} from '../actionTypes/calculation';
 import Icon from 'react-native-vector-icons/dist/Feather';
 
 const {width: viewportWidth} = Dimensions.get('window');
@@ -15,18 +16,20 @@ const itemHorizontalMargin = Math.round(viewportWidth * 0);
 const itemWidth = sliderWidth + itemHorizontalMargin * 2;
 
 function ResultScreen({results, wallpaper, navigation}) {
-  function renderItem({item}) {
+  function renderItem({item, index}) {
     const wallp = wallpaper[item.key];
     const backgroundImageUrl = wallp && wallp.urls.regular;
     return (
       <Result
-        key={item.key}
-        params={item.params}
-        grossAnnualIncome={item.grossAnnualIncome}
-        deductions={item.deductions}
+        {...item}
         backgroundImageUrl={backgroundImageUrl}
+        onDelete={() => onDelete(index)}
       />
     );
+  }
+
+  function onDelete(index) {
+    dispatch(createAction(CALCULATION_DELETE_REQUEST, index));
   }
 
   const [badge, setBadge] = useState(0);

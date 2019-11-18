@@ -10,34 +10,70 @@ const sepNum = (number, precision = 0) => {
   if (precision === 0) {
     return {int: sepThou(int), float: ''};
   }
-  const float = ((number - int) * Math.pow(10, precision)) | 0; // eslint-disable-line no-bitwise
+  const float = Math.round((number - int) * Math.pow(10, precision));
   return {
     int: sepThou(int),
     float: '.' + ('0' + float).substr(-precision),
   };
 };
 
-export const Result = ({
-  params,
-  grossAnnualIncome,
-  deductions,
-  backgroundImageUrl,
-}) => {
-  const daysWorkedPerYear = params.daysPerWeek * 52 - params.annualLeave;
-  let totalDeductions = 9;
+function prepSection(data, precision) {
   const taxes = {};
-  for (const k in deductions) {
-    const d = deductions[k];
-    totalDeductions += d;
-    taxes[k] = sepNum(d, params.country.precision);
+  for (let k in data.taxes) {
+    taxes[k] = sepNum(data.taxes[k], precision);
   }
-  const net = grossAnnualIncome - totalDeductions;
-  const dailyRateBeforeTax = grossAnnualIncome / daysWorkedPerYear;
-  const dailyRateAfterTax = net / daysWorkedPerYear;
-  const hoursWorkedPerYear = daysWorkedPerYear * params.hoursPerDay;
-  const hourlyRateBeforeTax = grossAnnualIncome / hoursWorkedPerYear;
-  const hourlyRateAfterTax = net / hoursWorkedPerYear;
+  let leave = '';
+  if (data.leave.days) {
+    leave += data.leave.days + ' days';
+  }
+  if (data.leave.hours) {
+    if (leave) {
+      leave += ', ';
+    }
+    leave += data.leave.hours + ' hours';
+  }
+  if (data.leave.minutes) {
+    if (leave) {
+      leave += ', ';
+    }
+    leave += data.leave.minutes + ' minutes';
+  }
 
+  const o = {
+    gross: sepNum(data.gross, precision),
+    net: sepNum(data.net, precision),
+    leave,
+    taxes,
+    taxed: sepNum(data.taxed, precision),
+  };
+
+  if (data.hours) {
+    o.hours = sepNum(data.hours, 1);
+  }
+  if (data.days) {
+    o.days = sepNum(data.days, 1);
+  }
+  if (data.weeks) {
+    o.weeks = sepNum(data.weeks, 1);
+  }
+  if (data.months) {
+    o.months = sepNum(data.months, 1);
+  }
+  return o;
+}
+
+export const Result = ({
+  country,
+  variant,
+  decade,
+  year,
+  month,
+  week,
+  day,
+  hour,
+  backgroundImageUrl,
+  onDelete,
+}) => {
   let backgroundImageOpacity = new Animated.Value(0);
   const fadeIn = () =>
     Animated.timing(backgroundImageOpacity, {
@@ -46,26 +82,19 @@ export const Result = ({
       useNativeDriver: true,
     }).start();
 
-  const numbers = {
-    'Hours per day': sepNum(params.hoursPerDay, 1),
-    'Days per week': sepNum(params.daysPerWeek, 1),
-    'Annual leave': sepNum(params.annualLeave, 1),
-    'Annual working days': sepNum(daysWorkedPerYear, 1),
-    'Annual working hours': sepNum(hoursWorkedPerYear, 1),
-  };
-
-  const monies = {
-    'Gross annual income': sepNum(grossAnnualIncome, params.country.precision),
-    'Real annual income': sepNum(net, params.country.precision),
-    'Daily rate': sepNum(dailyRateBeforeTax, params.country.precision),
-    'Real daily rate': sepNum(dailyRateAfterTax, params.country.precision),
-    'Hourly rate': sepNum(hourlyRateBeforeTax, params.country.precision),
-    'Real hourly rate': sepNum(hourlyRateAfterTax, params.country.precision),
-    Deductions: sepNum(totalDeductions, params.country.precision),
-  };
+  const result = [
+    // {title: 'Decade', data: prepSection(decade, country.precision)},
+    {title: 'Year', data: prepSection(year, country.precision)},
+    {title: 'Month', data: prepSection(month, country.precision)},
+    {title: 'Week', data: prepSection(week, country.precision)},
+    {title: 'Day', data: prepSection(day, country.precision)},
+    {title: 'Hour', data: prepSection(hour, country.precision)},
+  ];
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={{flexGrow: 1}}>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.containerContent}>
       <Animated.View
         style={[
           {opacity: backgroundImageOpacity},
@@ -81,50 +110,107 @@ export const Result = ({
       </Animated.View>
       <View style={styles.content}>
         <View style={styles.flagContainer}>
-          <Text style={styles.flag}>{params.country.flag}</Text>
+          <Text style={styles.flag}>{country.flag}</Text>
         </View>
         <View style={styles.titleHolder}>
-          <Text style={styles.title}>{params.country.title}</Text>
+          <Text style={styles.title}>{country.name}</Text>
         </View>
         <View style={styles.titleHolder}>
-          <Text style={styles.subtitle}>{params.variant.title}</Text>
+          <Text style={styles.subtitle}>{variant}</Text>
         </View>
-        {Object.keys(numbers).map(label => (
-          <View style={styles.row} key={label}>
-            <Text style={styles.label}>{label}</Text>
-            <Text style={styles.label}>
-              {numbers[label].int}
-              <Text style={styles.float}>{numbers[label].float}</Text>
-            </Text>
-          </View>
-        ))}
-        {Object.keys(monies).map(label => (
-          <View style={styles.row} key={label}>
-            <Text style={styles.label}>{label}</Text>
-            <Text style={styles.label}>
-              <Text style={styles.currency}>{params.country.prefix || ''}</Text>
-              {monies[label].int}
-              <Text style={styles.float}>{monies[label].float}</Text>
-              <Text style={styles.currency}>{params.country.suffix || ''}</Text>
-            </Text>
-          </View>
-        ))}
-        {Object.keys(taxes).map(label => (
-          <View style={styles.row} key={label}>
-            <Text style={styles.label}> - {label}</Text>
-            <Text style={styles.label}>
-              <Text style={styles.currency}>{params.country.prefix || ''}</Text>
-              {taxes[label].int}
-              <Text style={styles.float}>{taxes[label].float}</Text>
-              <Text style={styles.currency}>{params.country.suffix || ''}</Text>
-            </Text>
+        {result.map(cat => (
+          <View style={styles.section} key={cat.title}>
+            <Text style={styles.sectionTitle}>{cat.title}</Text>
+            {cat.data.months && (
+              <View style={styles.row}>
+                <Text style={styles.label}>Work months</Text>
+                <Text style={styles.label}>
+                  {cat.data.months.int}
+                  <Text style={styles.float}>{cat.data.months.float}</Text>
+                </Text>
+              </View>
+            )}
+            {cat.data.weeks && (
+              <View style={styles.row}>
+                <Text style={styles.label}>Work weeks</Text>
+                <Text style={styles.label}>
+                  {cat.data.weeks.int}
+                  <Text style={styles.float}>{cat.data.weeks.float}</Text>
+                </Text>
+              </View>
+            )}
+            {cat.data.days && (
+              <View style={styles.row}>
+                <Text style={styles.label}>Work days</Text>
+                <Text style={styles.label}>
+                  {cat.data.days.int}
+                  <Text style={styles.float}>{cat.data.days.float}</Text>
+                </Text>
+              </View>
+            )}
+            {cat.data.hours && (
+              <View style={styles.row}>
+                <Text style={styles.label}>Work hours</Text>
+                <Text style={styles.label}>
+                  {cat.data.hours.int}
+                  <Text style={styles.float}>{cat.data.hours.float}</Text>
+                </Text>
+              </View>
+            )}
+            <View style={styles.row}>
+              <Text style={styles.label}>Leave</Text>
+              <Text style={styles.label}>{cat.data.leave}</Text>
+            </View>
+            <View style={styles.row}>
+              <Text style={styles.label}>Before tax</Text>
+              <Text style={styles.label}>
+                <Text style={styles.currency}>{country.prefix || ''}</Text>
+                {cat.data.gross.int}
+                <Text style={styles.float}>{cat.data.gross.float}</Text>
+                <Text style={styles.currency}>{country.suffix || ''}</Text>
+              </Text>
+            </View>
+            <View style={styles.row}>
+              <Text style={styles.label}>After tax</Text>
+              <Text style={styles.label}>
+                <Text style={styles.currency}>{country.prefix || ''}</Text>
+                {cat.data.net.int}
+                <Text style={styles.float}>{cat.data.net.float}</Text>
+                <Text style={styles.currency}>{country.suffix || ''}</Text>
+              </Text>
+            </View>
+            {Object.keys(cat.data.taxes).length > 1 && (
+              <View style={styles.row}>
+                <Text style={styles.label}>Total deductions</Text>
+                <Text style={styles.label}>
+                  <Text style={styles.currency}>{country.prefix || ''}</Text>
+                  {cat.data.taxed.int}
+                  <Text style={styles.float}>{cat.data.taxed.float}</Text>
+                  <Text style={styles.currency}>{country.suffix || ''}</Text>
+                </Text>
+              </View>
+            )}
+            {Object.keys(cat.data.taxes).map(label => (
+              <View style={styles.row} key={label}>
+                <Text style={styles.label}> - {label}</Text>
+                <Text style={styles.label}>
+                  <Text style={styles.currency}>{country.prefix || ''}</Text>
+                  {cat.data.taxes[label].int}
+                  <Text style={styles.float}>
+                    {cat.data.taxes[label].float}
+                  </Text>
+                  <Text style={styles.currency}>{country.suffix || ''}</Text>
+                </Text>
+              </View>
+            ))}
           </View>
         ))}
         <View style={styles.buttonHolder}>
           <TextButton
             title="Delete"
             titleColor="#fff"
-            titleStyle={{backgroundColor: '#900'}}
+            titleStyle={styles.buttonTitle}
+            onPress={onDelete}
           />
         </View>
       </View>
@@ -147,6 +233,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  containerContent: {flexGrow: 1},
   content: {
     flex: 1,
     paddingLeft: 20,
@@ -217,5 +304,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     paddingTop: 20,
+  },
+  buttonTitle: {backgroundColor: '#900'},
+  sectionTitle: {
+    fontSize: 24,
   },
 });

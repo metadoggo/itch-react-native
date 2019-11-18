@@ -1,11 +1,8 @@
-import {
-  CALCULATE_SUCCESS,
-  MOVE_RESULT_TO_TOP,
-} from '../actionTypes/calculation';
+import {MOVE_RESULT_TO_TOP, RESULT_LOADED} from '../actionTypes/calculation';
 
 export default function(state = [], action) {
   switch (action.type) {
-    case CALCULATE_SUCCESS:
+    case RESULT_LOADED:
       return [action.data, ...state];
     case MOVE_RESULT_TO_TOP:
       var els = state.slice();
