@@ -117,8 +117,8 @@ export default function(taxCategories, term, rate, hours, days, leave) {
       leave: daysToDuration(leave * 10),
       hours: workingHoursPerYear * 10,
       days: workingDaysPerYear * 10,
-      weeks: (workingDaysPerYear / 52) * 10,
-      months: (workingDaysPerYear / 12) * 10,
+      weeks: (workingDaysPerYear / 365) * 52 * 10,
+      months: (workingDaysPerYear / 365) * 12 * 10,
     },
     year: {
       gross: gross,
@@ -128,8 +128,8 @@ export default function(taxCategories, term, rate, hours, days, leave) {
       leave: daysToDuration(leave),
       hours: workingHoursPerYear,
       days: workingDaysPerYear,
-      weeks: workingDaysPerYear / 52,
-      months: workingDaysPerYear / 12,
+      weeks: (workingDaysPerYear / 365) * 52,
+      months: (workingDaysPerYear / 365) * 12,
     },
     month: {
       gross: gross / 12,
@@ -138,7 +138,7 @@ export default function(taxCategories, term, rate, hours, days, leave) {
       taxed: taxed / 12,
       leave: daysToDuration(leave / 12),
       hours: workingHoursPerYear / 12,
-      weeks: workingDaysPerYear / 12,
+      days: workingDaysPerYear / 12,
     },
     week: {
       gross: gross / 52,

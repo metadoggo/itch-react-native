@@ -1,4 +1,4 @@
-import {fork, spawn, all} from 'redux-saga/effects';
+import {fork, all} from 'redux-saga/effects';
 
 // sagas
 import handleUseChange from './auth.saga';

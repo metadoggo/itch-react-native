@@ -14,7 +14,7 @@ export default function FormScreen({navigation}) {
 
   const onSubmit = formData => {
     dispatch(createAction(CALCULATE_REQUEST, formData));
-    navigation.navigate('Result');
+    navigation.navigate('Result', {index: 0});
   };
 
   return (

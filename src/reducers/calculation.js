@@ -19,7 +19,7 @@ const sepNum = (number, precision = 0) => {
 
 function prepSection(data, precision) {
   const taxes = {};
-  for (let k in data.taxes) {
+  for (const k in data.taxes) {
     taxes[k] = sepNum(data.taxes[k], precision);
   }
   let leave = '';

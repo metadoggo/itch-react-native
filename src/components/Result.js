@@ -6,6 +6,7 @@ import {TextButton} from 'react-native-material-buttons';
 import {WALLPAPER_LOAD_REQUEST} from '../actionTypes/wallpaper';
 import {createAction} from '../actions';
 import {connect, useDispatch} from 'react-redux';
+import {LOADED} from '../constants/loading.states';
 
 let backgroundImageOpacity = new Animated.Value(0);
 const fadeIn = () =>
@@ -17,7 +18,6 @@ const fadeIn = () =>
 
 function Result({id, country, variant, durations, wallpaperUrl, onDelete}) {
   const dispatch = useDispatch();
-  console.log('Rendering Result');
   if (!wallpaperUrl) {
     dispatch(createAction(WALLPAPER_LOAD_REQUEST, id));
   }
@@ -148,11 +148,15 @@ function Result({id, country, variant, durations, wallpaperUrl, onDelete}) {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const wallpaper = state.wallpaper[ownProps.id];
-  const wallpaperUrl = wallpaper && wallpaper.urls.regular;
-  return {
-    wallpaperUrl,
-  };
+  if (state.wallpaper.hasOwnProperty(ownProps.id)) {
+    const meta = state.wallpaper[ownProps.id];
+    if (meta.state === LOADED) {
+      return {
+        wallpaperUrl: state.wallpaper[ownProps.id].data.urls.regular,
+      };
+    }
+  }
+  return {};
 };
 
 export default connect(mapStateToProps)(Result);
@@ -246,5 +250,6 @@ const styles = StyleSheet.create({
   buttonTitle: {backgroundColor: '#900'},
   sectionTitle: {
     fontSize: 24,
+    marginTop: 10,
   },
 });

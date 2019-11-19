@@ -6,7 +6,6 @@ import {
 import {createAction} from '../actions';
 
 function* handler(action) {
-  console.log('deleting ' + action.data);
   const calculation = yield select(state => state.calculation);
   const result = calculation[action.data];
   const now = Date.now();

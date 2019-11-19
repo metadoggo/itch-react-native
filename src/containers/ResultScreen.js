@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect, useDispatch} from 'react-redux';
 import Result from '../components/Result';
@@ -14,7 +14,7 @@ const sliderWidth = Math.round(viewportWidth * 1);
 const itemHorizontalMargin = Math.round(viewportWidth * 0);
 const itemWidth = sliderWidth + itemHorizontalMargin * 2;
 
-function ResultScreen({results}) {
+function ResultScreen({results, navigation}) {
   function renderItem({item, index}) {
     return <Result {...item} onDelete={() => onDelete(index)} />;
   }
@@ -23,7 +23,24 @@ function ResultScreen({results}) {
     dispatch(createAction(CALCULATION_DELETE_REQUEST, index));
   }
 
+  const [carousel, setCarousel] = useState();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const willFocusSub = navigation.addListener('willFocus', payload => {
+      if (
+        payload.action &&
+        payload.action.params &&
+        !isNaN(payload.action.params.index)
+      ) {
+        const index = payload.action.params.index;
+        if (index !== carousel.currentIndex) {
+          carousel.snapToItem(index, false, true);
+        }
+      }
+    });
+    return () => willFocusSub.remove();
+  });
 
   if (results.length > 0) {
     return (
@@ -31,11 +48,13 @@ function ResultScreen({results}) {
         style={styles.container}
         contentContainerStyle={styles.containerContent}>
         <Carousel
+          ref={c => setCarousel(c)}
           data={results}
           renderItem={renderItem}
           sliderWidth={sliderWidth}
           itemWidth={itemWidth}
           initialNumToRender={1}
+          maxToRenderPerBatch={1}
         />
       </ScrollView>
     );
