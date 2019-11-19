@@ -77,16 +77,15 @@ export default function IncomeForm({onSubmit, taxData}) {
 
   const extractCountryKey = item => item.flag;
 
-  const renderVariantItem = ({item}) => (
+  const renderVariantItem = item => (
     <TouchableOpacity
+      key={item.title}
       style={styles.variantRow}
       onPress={() => setVariant(item)}>
       <Text>{item.title}</Text>
       {variant === item && <Text style={styles.tick}>✔️</Text>}
     </TouchableOpacity>
   );
-
-  const extractVariantKey = item => item.title;
 
   return (
     <View style={styles.container}>
@@ -111,13 +110,7 @@ export default function IncomeForm({onSubmit, taxData}) {
           <Text style={styles.flag}>{country.flag}</Text>
         </TouchableOpacity>
       </View>
-      <View>
-        <FlatList
-          data={country.years}
-          renderItem={renderVariantItem}
-          keyExtractor={extractVariantKey}
-        />
-      </View>
+      <View>{country.years.map(item => renderVariantItem(item))}</View>
       <View style={styles.termSelector}>
         <Dropdown
           label="My wage is calcualted"

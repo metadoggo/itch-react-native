@@ -19,7 +19,7 @@ function* handler(action) {
     daysPerWeek,
     annualLeave,
   } = action.data;
-  const key = md5(
+  const id = md5(
     flag +
       variant +
       term +
@@ -29,7 +29,7 @@ function* handler(action) {
       annualLeave.toFixed(precision),
   );
 
-  const i = results.findIndex(el => el.key === key);
+  const i = results.findIndex(el => el.id === id);
   if (i === -1) {
     const result = calculate(
       taxCategories,
@@ -41,7 +41,7 @@ function* handler(action) {
     );
     yield put(
       createAction(CALCULATE_SUCCESS, {
-        key,
+        id,
         country: {
           name,
           flag,

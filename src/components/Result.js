@@ -1,100 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {View, ScrollView, Text, StyleSheet, Animated} from 'react-native';
+import {View, Text, StyleSheet, Animated} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {TextButton} from 'react-native-material-buttons';
+import {WALLPAPER_LOAD_REQUEST} from '../actionTypes/wallpaper';
+import {createAction} from '../actions';
+import {connect, useDispatch} from 'react-redux';
 
-const sepThou = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-const sepNum = (number, precision = 0) => {
-  const int = number | 0; // eslint-disable-line no-bitwise
-  if (precision === 0) {
-    return {int: sepThou(int), float: ''};
-  }
-  const float = Math.round((number - int) * Math.pow(10, precision));
-  return {
-    int: sepThou(int),
-    float: '.' + ('0' + float).substr(-precision),
-  };
-};
+let backgroundImageOpacity = new Animated.Value(0);
+const fadeIn = () =>
+  Animated.timing(backgroundImageOpacity, {
+    toValue: 1,
+    duration: 600,
+    useNativeDriver: true,
+  }).start();
 
-function prepSection(data, precision) {
-  const taxes = {};
-  for (let k in data.taxes) {
-    taxes[k] = sepNum(data.taxes[k], precision);
+function Result({id, country, variant, durations, wallpaperUrl, onDelete}) {
+  const dispatch = useDispatch();
+  console.log('Rendering Result');
+  if (!wallpaperUrl) {
+    dispatch(createAction(WALLPAPER_LOAD_REQUEST, id));
   }
-  let leave = '';
-  if (data.leave.days) {
-    leave += data.leave.days + ' days';
-  }
-  if (data.leave.hours) {
-    if (leave) {
-      leave += ', ';
-    }
-    leave += data.leave.hours + ' hours';
-  }
-  if (data.leave.minutes) {
-    if (leave) {
-      leave += ', ';
-    }
-    leave += data.leave.minutes + ' minutes';
-  }
-
-  const o = {
-    gross: sepNum(data.gross, precision),
-    net: sepNum(data.net, precision),
-    leave,
-    taxes,
-    taxed: sepNum(data.taxed, precision),
-  };
-
-  if (data.hours) {
-    o.hours = sepNum(data.hours, 1);
-  }
-  if (data.days) {
-    o.days = sepNum(data.days, 1);
-  }
-  if (data.weeks) {
-    o.weeks = sepNum(data.weeks, 1);
-  }
-  if (data.months) {
-    o.months = sepNum(data.months, 1);
-  }
-  return o;
-}
-
-export const Result = ({
-  country,
-  variant,
-  decade,
-  year,
-  month,
-  week,
-  day,
-  hour,
-  backgroundImageUrl,
-  onDelete,
-}) => {
-  let backgroundImageOpacity = new Animated.Value(0);
-  const fadeIn = () =>
-    Animated.timing(backgroundImageOpacity, {
-      toValue: 1,
-      duration: 600,
-      useNativeDriver: true,
-    }).start();
-
-  const result = [
-    // {title: 'Decade', data: prepSection(decade, country.precision)},
-    {title: 'Year', data: prepSection(year, country.precision)},
-    {title: 'Month', data: prepSection(month, country.precision)},
-    {title: 'Week', data: prepSection(week, country.precision)},
-    {title: 'Day', data: prepSection(day, country.precision)},
-    {title: 'Hour', data: prepSection(hour, country.precision)},
-  ];
 
   return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.containerContent}>
+    <>
       <Animated.View
         style={[
           {opacity: backgroundImageOpacity},
@@ -104,7 +33,7 @@ export const Result = ({
           style={styles.backgroundImage}
           onLoad={fadeIn}
           source={{
-            uri: backgroundImageUrl,
+            uri: wallpaperUrl,
           }}
         />
       </Animated.View>
@@ -118,7 +47,7 @@ export const Result = ({
         <View style={styles.titleHolder}>
           <Text style={styles.subtitle}>{variant}</Text>
         </View>
-        {result.map(cat => (
+        {durations.map(cat => (
           <View style={styles.section} key={cat.title}>
             <Text style={styles.sectionTitle}>{cat.title}</Text>
             {cat.data.months && (
@@ -214,9 +143,19 @@ export const Result = ({
           />
         </View>
       </View>
-    </ScrollView>
+    </>
   );
+}
+
+const mapStateToProps = (state, ownProps) => {
+  const wallpaper = state.wallpaper[ownProps.id];
+  const wallpaperUrl = wallpaper && wallpaper.urls.regular;
+  return {
+    wallpaperUrl,
+  };
 };
+
+export default connect(mapStateToProps)(Result);
 
 Result.propType = {
   gross: PropTypes.number.isRequired,
@@ -233,7 +172,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  containerContent: {flexGrow: 1},
   content: {
     flex: 1,
     paddingLeft: 20,

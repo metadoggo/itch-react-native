@@ -1,11 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {connect, useDispatch} from 'react-redux';
-import {Result} from '../components/Result';
+import Result from '../components/Result';
 import Carousel from 'react-native-snap-carousel';
-import {Dimensions, StyleSheet, View, Text} from 'react-native';
+import {Dimensions, StyleSheet, View, Text, ScrollView} from 'react-native';
 import {createAction} from '../actions';
-import {WALLPAPER_LOAD_REQUEST} from '../actionTypes/wallpaper';
 import {CALCULATION_DELETE_REQUEST} from '../actionTypes/calculation';
 import Icon from 'react-native-vector-icons/dist/Feather';
 
@@ -15,42 +14,30 @@ const sliderWidth = Math.round(viewportWidth * 1);
 const itemHorizontalMargin = Math.round(viewportWidth * 0);
 const itemWidth = sliderWidth + itemHorizontalMargin * 2;
 
-function ResultScreen({results, wallpaper, navigation}) {
+function ResultScreen({results}) {
   function renderItem({item, index}) {
-    const wallp = wallpaper[item.key];
-    const backgroundImageUrl = wallp && wallp.urls.regular;
-    return (
-      <Result
-        {...item}
-        backgroundImageUrl={backgroundImageUrl}
-        onDelete={() => onDelete(index)}
-      />
-    );
+    return <Result {...item} onDelete={() => onDelete(index)} />;
   }
 
   function onDelete(index) {
     dispatch(createAction(CALCULATION_DELETE_REQUEST, index));
   }
 
-  const [badge, setBadge] = useState(0);
-  if (badge !== results.length) {
-    setBadge(results.length);
-    navigation.setParams({badge: results.length});
-  }
-
   const dispatch = useDispatch();
 
   if (results.length > 0) {
-    dispatch(createAction(WALLPAPER_LOAD_REQUEST, results[0].key));
     return (
-      <View style={styles.container}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.containerContent}>
         <Carousel
           data={results}
           renderItem={renderItem}
           sliderWidth={sliderWidth}
           itemWidth={itemWidth}
+          initialNumToRender={1}
         />
-      </View>
+      </ScrollView>
     );
   }
 
@@ -86,7 +73,6 @@ ResultScreen.propType = {
 
 const mapStateToProps = state => ({
   results: state.calculation,
-  wallpaper: state.wallpaper,
 });
 
 export default connect(mapStateToProps)(ResultScreen);
@@ -94,9 +80,8 @@ export default connect(mapStateToProps)(ResultScreen);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignContent: 'center',
   },
+  containerContent: {flexGrow: 1},
   headline: {
     textAlign: 'center',
   },

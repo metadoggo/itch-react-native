@@ -20,9 +20,13 @@ Icon.loadFont();
 
 import FormScreen from '../containers/FormScreen';
 import ResultScreen from '../containers/ResultScreen';
+import navigationDebouncer from 'react-navigation-redux-debouncer';
 
 const sagaMiddleware = createSagaMiddleware();
-const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+const store = createStore(
+  rootReducer,
+  applyMiddleware(sagaMiddleware, navigationDebouncer(600)),
+);
 sagaMiddleware.run(rootSagas);
 
 const RootStack = createMaterialBottomTabNavigator(

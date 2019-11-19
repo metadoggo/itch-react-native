@@ -21,7 +21,10 @@ function* handler(action) {
         next: snap => {
           const docs = snap.docs;
           for (let i = 0; i < docs.length; i++) {
-            emit(docs[i].data());
+            emit({
+              ref: docs[i].ref,
+              ...docs[i].data(),
+            });
           }
         },
       }),
