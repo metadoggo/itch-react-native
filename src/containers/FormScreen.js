@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {SafeAreaView, ScrollView, StatusBar} from 'react-native';
 import {useDispatch} from 'react-redux';
 import IncomeForm from '../components/IncomeForm';
@@ -8,6 +8,7 @@ import {CALCULATE_REQUEST} from '../actionTypes/calculation';
 import {createAction} from '../actions';
 import taxData from '../../data/tax-data.json';
 import Icon from 'react-native-vector-icons/dist/Feather';
+import dynamicLinks from '@react-native-firebase/dynamic-links';
 
 export default function FormScreen({navigation}) {
   const dispatch = useDispatch();
@@ -16,6 +17,28 @@ export default function FormScreen({navigation}) {
     dispatch(createAction(CALCULATE_REQUEST, formData));
     navigation.navigate('Result', {index: 0});
   };
+
+  const handleDynamicLink = link => {
+    const queryString = link.url.split('?')[1];
+    const params = queryString.split('&');
+    let i = params.length;
+    const m = {};
+    while (i--) {
+      const p = params[i].split('=');
+      m[p[0]] = p[1];
+    }
+    const formData = {
+      term: m.t,
+      rate: parseFloat(m.r),
+      hoursPerDay: parseFloat(m.h),
+      daysPerWeek: parseFloat(m.d),
+      annualLeave: parseFloat(m.l),
+    };
+    dispatch(createAction(CALCULATE_REQUEST, formData));
+    navigation.navigate('Result', {index: 0});
+  };
+
+  useEffect(() => dynamicLinks().onLink(handleDynamicLink), []);
 
   return (
     <>

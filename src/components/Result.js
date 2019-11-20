@@ -8,6 +8,8 @@ import {createAction, Terms} from '../actions';
 import {connect, useDispatch} from 'react-redux';
 import {LOADED} from '../constants/loading.states';
 import Icon from 'react-native-vector-icons/Feather';
+import dynamicLinks from '@react-native-firebase/dynamic-links';
+import Config from 'react-native-config';
 
 let backgroundImageOpacity = new Animated.Value(0);
 const fadeIn = () =>
@@ -45,6 +47,27 @@ function Result({
   }
 
   async function share() {
+    const url =
+      Config.SHARE_URI_PREFIX +
+      '?t=' +
+      params.term +
+      '&r=' +
+      params.rate.int +
+      params.rate.float +
+      '&h=' +
+      params.hoursPerDay +
+      '&d=' +
+      params.daysPerWeek +
+      '&l=' +
+      params.annualLeave;
+    const link = await dynamicLinks().buildShortLink({
+      link: url,
+      domainUriPrefix: Config.FDL_URI_PREFIX,
+      analytics: {
+        campaign: 'share',
+      },
+    });
+
     let message =
       'Income Tax Calculator by Huy\n' +
       country.flag +
@@ -82,7 +105,8 @@ function Result({
       durations[Terms.YEARLY].net.int +
       durations[Terms.YEARLY].net.float +
       (country.suffix || '') +
-      '/y.\nFor more details download ITCH app';
+      '/y.\nFor more details download ITCH app ' +
+      link;
 
     try {
       const result = await Share.share({

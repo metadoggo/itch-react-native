@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-native-firebase/app": "^6.0.4",
     "@react-native-firebase/auth": "^6.0.4",
+    "@react-native-firebase/dynamic-links": "^6.0.4",
     "@react-native-firebase/firestore": "^6.0.4",
     "md5": "^2.2.1",
     "number-to-locale-string-polyfill": "^1.0.9",

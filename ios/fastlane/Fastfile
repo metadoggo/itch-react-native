@@ -1,0 +1,48 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+export_options = {
+	provisioningProfiles: {
+		"com.su93rheroes.itch.dev" => "match AdHoc com.su93rheroes.itch.dev",
+		"com.su93rheroes.itch" => "match AdHoc com.su93rheroes.itch",
+	}
+}
+
+platform :ios do
+  lane :dev do
+    match(type: "adhoc", force_for_new_devices: true)
+    build_app(
+      workspace: "Runner.xcworkspace",
+      scheme: "dev",
+      export_options: export_options,
+    )
+  end
+
+  desc "Push a new prod build to Crashlytics"
+  lane :prod do
+    match(type: "adhoc", force_for_new_devices: true)
+    build_app(
+      workspace: "Runner.xcworkspace",
+      scheme: "prod",
+      export_options: export_options,
+    )
+    crashlytics(
+      api_token: api_token,
+      build_secret: build_secret,
+    )
+  end
+end
