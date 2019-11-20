@@ -3,6 +3,7 @@ import {
   RESULT_LOADED,
   DELETE_RESULT_SUCCESS,
 } from '../actionTypes/calculation';
+import {setParams} from '../components/NavigationService';
 
 const sepThou = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 const sepNum = (number, precision = 0) => {
@@ -95,7 +96,9 @@ export default function(state = [], action) {
           },
         ],
       };
-      return [result, ...state];
+      const newState = [result, ...state];
+      setParams({params: {badge: newState.length}, key: 'Result'});
+      return newState;
     case MOVE_RESULT_TO_TOP:
       var els = state.slice();
       els.splice(action.data, 1);

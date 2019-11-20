@@ -67,13 +67,16 @@ function ResultScreen({results, navigation}) {
   );
 }
 
-ResultScreen.navigationOptions = ({navigation}) => ({
-  title: 'Results',
-  tabBarIcon: <Icon name="file-text" size={28} color="#ddd" />,
-  tabBarColor: '#009688',
-  shifting: true,
-  tabBarBadge: navigation.state.params && navigation.state.params.badge,
-});
+ResultScreen.navigationOptions = ({navigation}) => {
+  console.log('Navigation options! ', navigation);
+  return {
+    title: 'Results',
+    tabBarIcon: <Icon name="file-text" size={28} color="#ddd" />,
+    tabBarColor: '#009688',
+    shifting: true,
+    tabBarBadge: navigation.state.params && navigation.state.params.badge,
+  };
+};
 
 ResultScreen.propType = {
   results: PropTypes.arrayOf(

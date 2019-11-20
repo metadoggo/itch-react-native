@@ -21,6 +21,7 @@ Icon.loadFont();
 import FormScreen from '../containers/FormScreen';
 import ResultScreen from '../containers/ResultScreen';
 import navigationDebouncer from 'react-navigation-redux-debouncer';
+import {setTopLevelNavigator} from './NavigationService';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
@@ -47,6 +48,10 @@ const AppContainer = createAppContainer(RootStack);
 
 export default () => (
   <Provider store={store}>
-    <AppContainer />
+    <AppContainer
+      ref={navigatorRef => {
+        setTopLevelNavigator(navigatorRef);
+      }}
+    />
   </Provider>
 );
