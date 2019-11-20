@@ -14,12 +14,20 @@
             "target": "device"
         },
         {
-            "name": "iOS",
+            "name": "iOS Dev",
             "cwd": "${workspaceFolder}",
             "type": "reactnative",
             "request": "launch",
             "platform": "ios",
             "scheme": "dev"
+        },
+        {
+            "name": "iOS Prod",
+            "cwd": "${workspaceFolder}",
+            "type": "reactnative",
+            "request": "launch",
+            "platform": "ios",
+            "scheme": "prod"
         }
     ]
 }

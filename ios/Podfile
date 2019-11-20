@@ -1,6 +1,12 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
+project 'itch',
+        'Debug dev' => :debug,
+        'Release dev' => :release,
+        'Debug prod' => :debug,
+        'Release prod' => :release
+
 target 'itch' do
   # Pods for itch
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
@@ -35,23 +41,9 @@ target 'itch' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
 
-  target 'itchTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
   use_native_modules!
 end
 
-target 'itch-tvOS' do
-  # Pods for itch-tvOS
-
-  target 'itch-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-end
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|
