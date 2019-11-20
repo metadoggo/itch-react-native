@@ -1,9 +1,5 @@
-import {
-  MOVE_RESULT_TO_TOP,
-  RESULT_LOADED,
-  DELETE_RESULT_SUCCESS,
-} from '../actionTypes/calculation';
-import {setParams} from '../components/NavigationService';
+import {MOVE_RESULT_TO_TOP, RESULT_LOADED} from '../actionTypes/calculation';
+import {Terms} from '../actions';
 
 const sepThou = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 const sepNum = (number, precision = 0) => {
@@ -66,47 +62,30 @@ function prepSection(data, precision) {
 export default function(state = [], action) {
   switch (action.type) {
     case RESULT_LOADED:
-      const data = action.data;
-      const result = {
-        docRef: data.ref,
-        id: data.id,
-        country: data.country,
-        variant: data.variant,
-        durations: [
-          // {title: 'Decade', data: prepSection(decade, country.precision)},
-          {
-            title: 'Year',
-            data: prepSection(data.year, data.country.precision),
-          },
-          {
-            title: 'Month',
-            data: prepSection(data.month, data.country.precision),
-          },
-          {
-            title: 'Week',
-            data: prepSection(data.week, data.country.precision),
-          },
-          {
-            title: 'Day',
-            data: prepSection(data.day, data.country.precision),
-          },
-          {
-            title: 'Hour',
-            data: prepSection(data.hour, data.country.precision),
-          },
-        ],
-      };
-      const newState = [result, ...state];
-      setParams({params: {badge: newState.length}, key: 'Result'});
-      return newState;
+      return action.data.map(result => ({
+        docRef: result.ref,
+        id: result.id,
+        params: {
+          rate: sepNum(result.params.rate),
+          term: result.params.term,
+          hoursPerDay: result.params.hoursPerDay,
+          daysPerWeek: result.params.daysPerWeek,
+          annualLeave: result.params.annualLeave,
+        },
+        country: result.country,
+        variant: result.variant,
+        durations: {
+          [Terms.YEARLY]: prepSection(result.year, result.country.precision),
+          [Terms.MONTHLY]: prepSection(result.month, result.country.precision),
+          [Terms.WEEKLY]: prepSection(result.week, result.country.precision),
+          [Terms.DAILY]: prepSection(result.day, result.country.precision),
+          [Terms.HOURLY]: prepSection(result.hour, result.country.precision),
+        },
+      }));
     case MOVE_RESULT_TO_TOP:
       var els = state.slice();
       els.splice(action.data, 1);
       els.unshift(state[action.data]);
-      return els;
-    case DELETE_RESULT_SUCCESS:
-      var els = state.slice();
-      els.splice(action.data, 1);
       return els;
     default:
       return state;

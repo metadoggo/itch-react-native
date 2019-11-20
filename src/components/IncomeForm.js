@@ -116,13 +116,13 @@ export default function IncomeForm({onSubmit, taxData}) {
           label="My wage is calcualted"
           data={terms}
           value={term}
-          onChangeText={setTerm}
+          onChangeText={value => setTerm(value)}
         />
       </View>
       <View style={styles.row}>
         <TextField
-          label={term === Terms.YEARLY ? 'Annual Salary' : 'Daily Rate'}
-          keyboardType="numbers-and-punctuation"
+          label={term === Terms.YEARLY ? 'Salary' : 'Rate'}
+          keyboardType="decimal-pad"
           tintColor={'#00BCD4'}
           placeholder="e.g. 43000"
           value={rate}
@@ -132,7 +132,7 @@ export default function IncomeForm({onSubmit, taxData}) {
       <View>
         <TextField
           label="Hours per day"
-          keyboardType="numbers-and-punctuation"
+          keyboardType="decimal-pad"
           tintColor={'#00BCD4'}
           placeholder="e.g. 7.5"
           value={hoursPerDay}
@@ -143,7 +143,7 @@ export default function IncomeForm({onSubmit, taxData}) {
       <View>
         <TextField
           label="Days per week"
-          keyboardType="numbers-and-punctuation"
+          keyboardType="decimal-pad"
           tintColor={'#00BCD4'}
           placeholder="e.g. 3.5"
           value={daysPerWeek}
@@ -154,7 +154,7 @@ export default function IncomeForm({onSubmit, taxData}) {
       <View>
         <TextField
           label="Holidays"
-          keyboardType="numbers-and-punctuation"
+          keyboardType="decimal-pad"
           tintColor={'#00BCD4'}
           placeholder="e.g. 26.5"
           style={styles.input}

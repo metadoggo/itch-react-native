@@ -42,6 +42,13 @@ function* handler(action) {
     yield put(
       createAction(CALCULATE_SUCCESS, {
         id,
+        params: {
+          term,
+          rate,
+          hoursPerDay,
+          daysPerWeek,
+          annualLeave,
+        },
         country: {
           name,
           flag,

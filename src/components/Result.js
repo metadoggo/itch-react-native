@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, StyleSheet, Animated} from 'react-native';
+import {View, Text, StyleSheet, Animated, Share} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {TextButton} from 'react-native-material-buttons';
 import {WALLPAPER_LOAD_REQUEST} from '../actionTypes/wallpaper';
-import {createAction} from '../actions';
+import {createAction, Terms} from '../actions';
 import {connect, useDispatch} from 'react-redux';
 import {LOADED} from '../constants/loading.states';
+import Icon from 'react-native-vector-icons/Feather';
 
 let backgroundImageOpacity = new Animated.Value(0);
 const fadeIn = () =>
@@ -16,10 +17,86 @@ const fadeIn = () =>
     useNativeDriver: true,
   }).start();
 
-function Result({id, country, variant, durations, wallpaperUrl, onDelete}) {
+const rateSuffix = {
+  [Terms.YEARLY]: '/y',
+  [Terms.DAILY]: '/d',
+  [Terms.HOURLY]: '/h',
+};
+
+function Result({
+  id,
+  params,
+  country,
+  variant,
+  durations,
+  wallpaperUrl,
+  onDelete,
+}) {
+  const sections = [
+    {title: 'Year', data: durations[Terms.YEARLY]},
+    {title: 'Month', data: durations[Terms.MONTHLY]},
+    {title: 'Week', data: durations[Terms.WEEKLY]},
+    {title: 'Day', data: durations[Terms.DAILY]},
+    {title: 'Hour', data: durations[Terms.HOURLY]},
+  ];
   const dispatch = useDispatch();
   if (!wallpaperUrl) {
     dispatch(createAction(WALLPAPER_LOAD_REQUEST, id));
+  }
+
+  async function share() {
+    let message =
+      'Income Tax Calculator by Huy\n' +
+      country.flag +
+      ' ' +
+      country.name +
+      '\nSalary: ' +
+      (country.prefix || '') +
+      params.rate.int +
+      params.rate.float +
+      (country.suffix || '') +
+      rateSuffix[params.term];
+    if (params.term !== Terms.YEARLY) {
+      message +=
+        ' = ' +
+        (country.prefix || '') +
+        durations[Terms.YEARLY].gross.int +
+        (country.suffix || '') +
+        '/y.\n';
+    }
+    for (const k in durations[Terms.YEARLY].taxes) {
+      const tax = durations[Terms.YEARLY].taxes[k];
+      message +=
+        '- ' +
+        k +
+        ': ' +
+        (country.prefix || '') +
+        tax.int +
+        tax.float +
+        (country.suffix || '') +
+        '/y.\n';
+    }
+    message +=
+      'Real salary: ' +
+      (country.prefix || '') +
+      durations[Terms.YEARLY].net.int +
+      durations[Terms.YEARLY].net.float +
+      (country.suffix || '') +
+      '/y.\nFor more details download ITCH app';
+
+    try {
+      const result = await Share.share({
+        title: 'ITCH',
+        message: message,
+      });
+
+      if (result.action === Share.sharedAction) {
+        console.log(`Shared with ${result.activityType}`);
+      }
+    } catch (error) {
+      console.log('Share error:');
+      console.log(error);
+    }
   }
 
   return (
@@ -47,7 +124,18 @@ function Result({id, country, variant, durations, wallpaperUrl, onDelete}) {
         <View style={styles.titleHolder}>
           <Text style={styles.subtitle}>{variant}</Text>
         </View>
-        {durations.map(cat => (
+        <View style={styles.shareButtonHolder}>
+          <Icon.Button
+            name="share-2"
+            size={30}
+            borderRadius={30}
+            color="#000"
+            backgroundColor="#fff"
+            onPress={share}>
+            Share
+          </Icon.Button>
+        </View>
+        {sections.map(cat => (
           <View style={styles.section} key={cat.title}>
             <Text style={styles.sectionTitle}>{cat.title}</Text>
             {cat.data.months && (
@@ -251,5 +339,11 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     marginTop: 10,
+  },
+  shareButtonHolder: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 20,
   },
 });

@@ -4,6 +4,7 @@ import {USER_CHANGED} from '../actionTypes/auth';
 import {RESULT_LOADED} from '../actionTypes/calculation';
 import {createAction} from '../actions';
 import firestore from '@react-native-firebase/firestore';
+import {setParams} from '../components/NavigationService';
 
 function* handler(action) {
   if (!action.data) {
@@ -19,12 +20,13 @@ function* handler(action) {
       .onSnapshot({
         error: e => console.log(e),
         next: snap => {
-          const docs = snap.docs;
-          for (let i = 0; i < docs.length; i++) {
-            emit({
-              ref: docs[i].ref,
-              ...docs[i].data(),
-            });
+          if (snap.docs.length) {
+            const results = snap.docs.map(doc => ({
+              ref: doc.ref,
+              ...doc.data(),
+            }));
+            setParams({params: {badge: results.length}, key: 'Result'});
+            emit(results);
           }
         },
       }),

@@ -29,6 +29,7 @@ function ResultScreen({results, navigation}) {
   useEffect(() => {
     const willFocusSub = navigation.addListener('willFocus', payload => {
       if (
+        carousel &&
         payload.action &&
         payload.action.params &&
         !isNaN(payload.action.params.index)
@@ -68,7 +69,6 @@ function ResultScreen({results, navigation}) {
 }
 
 ResultScreen.navigationOptions = ({navigation}) => {
-  console.log('Navigation options! ', navigation);
   return {
     title: 'Results',
     tabBarIcon: <Icon name="file-text" size={28} color="#ddd" />,
