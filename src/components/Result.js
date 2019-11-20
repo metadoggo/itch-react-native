@@ -60,13 +60,17 @@ function Result({
       params.daysPerWeek +
       '&l=' +
       params.annualLeave;
-    const link = await dynamicLinks().buildShortLink({
-      link: url,
-      domainUriPrefix: Config.FDL_URI_PREFIX,
-      analytics: {
-        campaign: 'share',
+      console.log(Config);
+    const link = await dynamicLinks().buildShortLink(
+      {
+        link: url,
+        domainUriPrefix: Config.FDL_URI_PREFIX,
+        analytics: {
+          campaign: 'share',
+        },
       },
-    });
+      'SHORT',
+    );
 
     let message =
       'Income Tax Calculator by Huy\n' +

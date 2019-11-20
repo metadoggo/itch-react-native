@@ -27,7 +27,8 @@
             "type": "reactnative",
             "request": "launch",
             "platform": "ios",
-            "scheme": "prod"
+            "scheme": "prod",
+            "target": "device"
         }
     ]
 }

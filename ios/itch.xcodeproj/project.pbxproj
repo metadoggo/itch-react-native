@@ -19,6 +19,7 @@
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* itchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = itchTests.m; sourceTree = "<group>"; };
+		0999B15089A2EFF6CAF04D4E /* Pods-itch.dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-itch.dev.debug.xcconfig"; path = "Target Support Files/Pods-itch/Pods-itch.dev.debug.xcconfig"; sourceTree = "<group>"; };
 		0B127B12E22B1260E3371403 /* Pods-itchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-itchTests.release.xcconfig"; path = "Target Support Files/Pods-itchTests/Pods-itchTests.release.xcconfig"; sourceTree = "<group>"; };
 		0D0CEDB678E847F2A54E4C7F /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Itch debug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Itch debug.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -33,6 +34,7 @@
 		39AAB0E9BF6D405C821307EF /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		3B82A39BACF0587650A65BB5 /* libPods-itchTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-itchTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3B4FDBFB89414E90ADE14D /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		4992B1EB2517E94EC168FDFB /* Pods-itch.prod.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-itch.prod.release.xcconfig"; path = "Target Support Files/Pods-itch/Pods-itch.prod.release.xcconfig"; sourceTree = "<group>"; };
 		65BBECDF582942C38312EA82 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		6601677ACE2D0F84B4AD96CB /* Pods-itch.debug dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-itch.debug dev.xcconfig"; path = "Target Support Files/Pods-itch/Pods-itch.debug dev.xcconfig"; sourceTree = "<group>"; };
 		683FB0DD4CDF44C88539ED8C /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
@@ -55,10 +57,12 @@
 		E0CCC6E20E3C4BECBA57576A /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		E5C142F6237C8C31004AE7DD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E78CB1A2F0982FD147303E34 /* libPods-itch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-itch.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB54F12309EF5477F1994651 /* Pods-itch.prod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-itch.prod.debug.xcconfig"; path = "Target Support Files/Pods-itch/Pods-itch.prod.debug.xcconfig"; sourceTree = "<group>"; };
 		EBC75F06480C8DF1D6DFABB5 /* Pods-itch-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-itch-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-itch-tvOS/Pods-itch-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		EF146988821C198B10A9F895 /* Pods-itch-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-itch-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-itch-tvOSTests/Pods-itch-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F518E0DB2014116A6AC0E062 /* Pods-itch.dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-itch.dev.release.xcconfig"; path = "Target Support Files/Pods-itch/Pods-itch.dev.release.xcconfig"; sourceTree = "<group>"; };
 		F8FBF80739AD194CE26DA285 /* Pods-itch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-itch.release.xcconfig"; path = "Target Support Files/Pods-itch/Pods-itch.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -155,6 +159,10 @@
 				6601677ACE2D0F84B4AD96CB /* Pods-itch.debug dev.xcconfig */,
 				C892F139FDD56340A634BBDE /* Pods-itch.release prod.xcconfig */,
 				98D98BA733387D5FE301E98A /* Pods-itch.release dev.xcconfig */,
+				EB54F12309EF5477F1994651 /* Pods-itch.prod.debug.xcconfig */,
+				0999B15089A2EFF6CAF04D4E /* Pods-itch.dev.debug.xcconfig */,
+				4992B1EB2517E94EC168FDFB /* Pods-itch.prod.release.xcconfig */,
+				F518E0DB2014116A6AC0E062 /* Pods-itch.dev.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -463,9 +471,9 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		13B07F941A680F5B00A75B9A /* Debug prod */ = {
+		13B07F941A680F5B00A75B9A /* Prod.Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6D1B78A14025EF0016983A23 /* Pods-itch.debug prod.xcconfig */;
+			baseConfigurationReference = EB54F12309EF5477F1994651 /* Pods-itch.prod.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
@@ -481,14 +489,14 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.su93rheroes.itch;
 				PRODUCT_NAME = "Itch debug";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.su93rheroes.itch.dev";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.su93rheroes.itch";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
-			name = "Debug prod";
+			name = Prod.Debug;
 		};
-		13B07F951A680F5B00A75B9A /* Release prod */ = {
+		13B07F951A680F5B00A75B9A /* Prod.Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C892F139FDD56340A634BBDE /* Pods-itch.release prod.xcconfig */;
+			baseConfigurationReference = 4992B1EB2517E94EC168FDFB /* Pods-itch.prod.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
@@ -503,12 +511,12 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.su93rheroes.itch;
 				PRODUCT_NAME = "Itch - tax calculator";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.su93rheroes.itch.dev";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.su93rheroes.itch";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
-			name = "Release prod";
+			name = Prod.Release;
 		};
-		83CBBA201A601CBA00E9B192 /* Debug prod */ = {
+		83CBBA201A601CBA00E9B192 /* Prod.Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -559,9 +567,9 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
-			name = "Debug prod";
+			name = Prod.Debug;
 		};
-		83CBBA211A601CBA00E9B192 /* Release prod */ = {
+		83CBBA211A601CBA00E9B192 /* Prod.Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -605,9 +613,9 @@
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
-			name = "Release prod";
+			name = Prod.Release;
 		};
-		E5543A8323859CBA0012002A /* Debug dev */ = {
+		E5543A8323859CBA0012002A /* Dev.Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -658,11 +666,11 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
-			name = "Debug dev";
+			name = Dev.Debug;
 		};
-		E5543A8423859CBA0012002A /* Debug dev */ = {
+		E5543A8423859CBA0012002A /* Dev.Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6601677ACE2D0F84B4AD96CB /* Pods-itch.debug dev.xcconfig */;
+			baseConfigurationReference = 0999B15089A2EFF6CAF04D4E /* Pods-itch.dev.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
@@ -681,9 +689,9 @@
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.su93rheroes.itch.dev";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
-			name = "Debug dev";
+			name = Dev.Debug;
 		};
-		E5543A8523859CC80012002A /* Release dev */ = {
+		E5543A8523859CC80012002A /* Dev.Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -727,11 +735,11 @@
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
-			name = "Release dev";
+			name = Dev.Release;
 		};
-		E5543A8623859CC80012002A /* Release dev */ = {
+		E5543A8623859CC80012002A /* Dev.Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 98D98BA733387D5FE301E98A /* Pods-itch.release dev.xcconfig */;
+			baseConfigurationReference = F518E0DB2014116A6AC0E062 /* Pods-itch.dev.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
@@ -749,7 +757,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.su93rheroes.itch.dev";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
-			name = "Release dev";
+			name = Dev.Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -757,24 +765,24 @@
 		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "itch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				13B07F941A680F5B00A75B9A /* Debug prod */,
-				E5543A8423859CBA0012002A /* Debug dev */,
-				13B07F951A680F5B00A75B9A /* Release prod */,
-				E5543A8623859CC80012002A /* Release dev */,
+				13B07F941A680F5B00A75B9A /* Prod.Debug */,
+				E5543A8423859CBA0012002A /* Dev.Debug */,
+				13B07F951A680F5B00A75B9A /* Prod.Release */,
+				E5543A8623859CC80012002A /* Dev.Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release prod";
+			defaultConfigurationName = Prod.Release;
 		};
 		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "itch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				83CBBA201A601CBA00E9B192 /* Debug prod */,
-				E5543A8323859CBA0012002A /* Debug dev */,
-				83CBBA211A601CBA00E9B192 /* Release prod */,
-				E5543A8523859CC80012002A /* Release dev */,
+				83CBBA201A601CBA00E9B192 /* Prod.Debug */,
+				E5543A8323859CBA0012002A /* Dev.Debug */,
+				83CBBA211A601CBA00E9B192 /* Prod.Release */,
+				E5543A8523859CC80012002A /* Dev.Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release prod";
+			defaultConfigurationName = Prod.Release;
 		};
 /* End XCConfigurationList section */
 	};

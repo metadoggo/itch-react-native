@@ -2,10 +2,10 @@ platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
 project 'itch',
-        'Debug dev' => :debug,
-        'Release dev' => :release,
-        'Debug prod' => :debug,
-        'Release prod' => :release
+        'Dev.Debug' => :debug,
+        'Dev.Release' => :release,
+        'Prod.Debug' => :debug,
+        'Prod.Release' => :release
 
 target 'itch' do
   # Pods for itch

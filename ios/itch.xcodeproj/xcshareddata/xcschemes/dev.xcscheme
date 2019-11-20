@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "Itch the tax calculator.app"
+               BuildableName = "Itch - tax calculator.app"
                BlueprintName = "itch"
                ReferencedContainer = "container:itch.xcodeproj">
             </BuildableReference>
@@ -23,7 +23,7 @@
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Debug dev"
+      buildConfiguration = "DevDebug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
@@ -31,7 +31,7 @@
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug dev"
+      buildConfiguration = "DevDebug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -45,14 +45,14 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Itch the tax calculator.app"
+            BuildableName = "Itch - tax calculator.app"
             BlueprintName = "itch"
             ReferencedContainer = "container:itch.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release dev"
+      buildConfiguration = "DevRelease"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -62,17 +62,17 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Itch the tax calculator.app"
+            BuildableName = "Itch - tax calculator.app"
             BlueprintName = "itch"
             ReferencedContainer = "container:itch.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Debug dev">
+      buildConfiguration = "DevDebug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Release dev"
+      buildConfiguration = "DevRelease"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
