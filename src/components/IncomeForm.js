@@ -104,6 +104,7 @@ export default function IncomeForm({onSubmit, taxData}) {
           />
         </View>
       </Modal>
+      <Text style={styles.title}>Income Tax Calulatorc by Huy</Text>
       <View style={styles.countrySelectorButton}>
         <TouchableOpacity
           onPress={() => setCountrySelectorVisible(!countrySelectorVisible)}>
@@ -165,6 +166,7 @@ export default function IncomeForm({onSubmit, taxData}) {
       </View>
       <View>
         <RaisedTextButton
+          style={styles.submitButton}
           title="Calculate"
           color={'#FF9800'}
           onPress={onPress}
@@ -183,7 +185,13 @@ const styles = StyleSheet.create({
     paddingLeft: 50,
     paddingRight: 50,
     paddingTop: 60,
-    paddingBottom: 100,
+    paddingBottom: 60,
+  },
+  paddingTop: 60,
+  title: {
+    fontSize: 22,
+    textAlign: 'center',
+    paddingBottom: 10,
   },
   countrySelectorButton: {
     justifyContent: 'center',
@@ -216,5 +224,8 @@ const styles = StyleSheet.create({
   },
   tick: {
     fontSize: 18,
+  },
+  submitButton: {
+    marginTop: 30,
   },
 });

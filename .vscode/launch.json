@@ -28,7 +28,7 @@
             "request": "launch",
             "platform": "ios",
             "scheme": "prod",
-            "target": "device"
+            "target": "simulator"
         }
     ]
 }
