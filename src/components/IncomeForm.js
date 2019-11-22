@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, FlatList, Text, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
-import {Terms} from '../actions';
+import {Terms} from '../models/Calculator';
 import {Dropdown} from 'react-native-material-dropdown';
 import {RaisedTextButton} from 'react-native-material-buttons';
 import {TextField} from 'react-native-material-textfield';

@@ -81,10 +81,9 @@ project.ext.react = [
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
-apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
 
 project.ext.envConfigFiles = [
-        dev: ".env.com.su93rheroes.itch.dev",
+        devDebug: ".env.com.su93rheroes.itch.dev",
         prod : ".env.com.su93rheroes.itch",
 ]
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
@@ -144,8 +143,8 @@ android {
         applicationId "com.su93rheroes.itch"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode project.env.get("BUILD").toInteger()
+        versionName project.env.get("VERSION")
         multiDexEnabled true
     }
     splits {
@@ -166,11 +165,12 @@ android {
         release {
             if (project.hasProperty("ITCH_PROD_KEYSTORE_PASSWORD")) {
                 storeFile file(ITCH_PROD_KEYSTORE_FILE)
-                keyAlias ITCH_PROD_KEY_ALIAS
                 storePassword ITCH_PROD_KEYSTORE_PASSWORD
+                keyAlias ITCH_PROD_ALIAS
                 keyPassword ITCH_PROD_PASSWORD
             }
-        }    }
+        }
+    }
     buildTypes {
         debug {
         }
@@ -186,17 +186,15 @@ android {
             dimension "mode"
             applicationIdSuffix '.dev'
             versionNameSuffix "-dev"
-            resValue "string", "app_name", "itch dev" 
             resValue "string", "build_config_package", "com.su93rheroes.itch"
-            resValue "string", "reactNativeCodePush_androidDeploymentKey", '""'
+            resValue "string", "reactNativeCodePush_androidDeploymentKey", project.env.get("CODE_PUSH_KEY_ANDROID")
             signingConfig signingConfigs.debug
         }
         prod {
             // Caution! In production, you need to generate your own keystore file.
             // see https://facebook.github.io/react-native/docs/signed-apk-android.
-            resValue "string", "app_name", "itch - Calulate Your Income Tax Obligations"
             resValue "string", "build_config_package", "com.su93rheroes.itch"
-            resValue "string", "reactNativeCodePush_androidDeploymentKey", '"<INSERT_PRODUCTION_KEY>"'
+            resValue "string", "reactNativeCodePush_androidDeploymentKey", project.env.get("CODE_PUSH_KEY_ANDROID")
             signingConfig signingConfigs.release
         }
     }
@@ -217,7 +215,6 @@ android {
 }
 
 dependencies {
-    implementation project(':react-native-code-push')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation 'androidx.appcompat:appcompat:1.1.0-rc01'

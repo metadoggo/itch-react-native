@@ -11,8 +11,8 @@ import md5 from 'md5';
 function* handler(action) {
   const results = yield select(state => state.calculation);
   const {
-    country: {flag, title: name, locale, currency, prefix, suffix, precision},
-    variant: {title: variant, categories: taxCategories},
+    country,
+    variant,
     term,
     rate,
     hoursPerDay,
@@ -20,19 +20,19 @@ function* handler(action) {
     annualLeave,
   } = action.data;
   const id = md5(
-    flag +
-      variant +
+    country.flag +
+      variant.title +
       term +
-      rate.toFixed(precision) +
-      hoursPerDay.toFixed(precision) +
-      daysPerWeek.toFixed(precision) +
-      annualLeave.toFixed(precision),
+      rate.toFixed(country.precision) +
+      hoursPerDay.toFixed(country.precision) +
+      daysPerWeek.toFixed(country.precision) +
+      annualLeave.toFixed(country.precision),
   );
 
   const i = results.findIndex(el => el.id === id);
   if (i === -1) {
     const result = calculate(
-      taxCategories,
+      variant.categories,
       term,
       rate,
       hoursPerDay,
@@ -50,15 +50,16 @@ function* handler(action) {
           annualLeave,
         },
         country: {
-          name,
-          flag,
-          locale,
-          currency,
-          prefix,
-          suffix,
-          precision,
+          id: country.id,
+          name: country.title,
+          flag: country.flag,
+          locale: country.locale,
+          currency: country.currency,
+          prefix: country.prefix,
+          suffix: country.suffix,
+          country: country.precision,
         },
-        variant,
+        variant: variant.title,
         ...result,
       }),
     );

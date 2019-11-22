@@ -9,6 +9,8 @@ import {createAction} from '../actions';
 import taxData from '../../data/tax-data.json';
 import Icon from 'react-native-vector-icons/dist/Feather';
 import dynamicLinks from '@react-native-firebase/dynamic-links';
+import slugify from 'slugify';
+import {Terms} from '../models/Calculator';
 
 export default function FormScreen({navigation}) {
   const dispatch = useDispatch();
@@ -19,6 +21,9 @@ export default function FormScreen({navigation}) {
   };
 
   const handleDynamicLink = link => {
+    if (!link) {
+      return;
+    }
     const queryString = link.url.split('?')[1];
     const params = queryString.split('&');
     let i = params.length;
@@ -27,7 +32,25 @@ export default function FormScreen({navigation}) {
       const p = params[i].split('=');
       m[p[0]] = p[1];
     }
+    if (!(m.c && m.v && m.t && m.r) || isNaN(m.h) || isNaN(m.d)) {
+      return;
+    }
+    if (
+      !(Terms.YEARLY === m.t || Terms.DAILY === m.t || Terms.HOURLY === m.t)
+    ) {
+      return;
+    }
+    const country = taxData.find(item => item.id === m.c);
+    if (!country) {
+      return;
+    }
+    const variant = country.years.find(item => slugify(item.title) === m.v);
+    if (!variant) {
+      return;
+    }
     const formData = {
+      country,
+      variant,
       term: m.t,
       rate: parseFloat(m.r),
       hoursPerDay: parseFloat(m.h),
@@ -38,6 +61,11 @@ export default function FormScreen({navigation}) {
     navigation.navigate('Result', {index: 0});
   };
 
+  useEffect(() => {
+    dynamicLinks()
+      .getInitialLink()
+      .then(handleDynamicLink);
+  });
   useEffect(() => dynamicLinks().onLink(handleDynamicLink), []);
 
   return (

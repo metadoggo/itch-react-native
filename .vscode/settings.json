@@ -1,23 +1,8 @@
 {
-    "react-native.android.runArguments.device": [
-        "--appId", "com.su93rheroes.itch.dev",
-        "--variant", "devDebug"
-    ],
-    "react-native.android.runArguments.simulator": [
-        "--appId", "com.su93rheroes.itch.dev",
-        "--variant", "devDebug"
-    ],
-    "react-native.ios.runArguments.simulator": [
-        "--configuration", "Prod.Debug"
-    ],
-    "react-native.ios.runArguments.device": [
-        "--configuration", "Prod.Debug"
-    ],
-    "search.exclude": {
-        "**/.vscode": true
-    },
-    "files.exclude": {
-        "**/node_modules/**": true
-    },
-    "debug.node.autoAttach": "off",
+  "search.exclude": {
+    "**/.vscode": true
+  },
+  "files.exclude": {
+    "**/node_modules/**": true
+  }
 }

@@ -1,5 +1,4 @@
 import {MOVE_RESULT_TO_TOP, RESULT_LOADED} from '../actionTypes/calculation';
-import {Terms} from '../actions';
 
 const sepThou = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 const sepNum = (number, precision = 0) => {
@@ -75,11 +74,11 @@ export default function(state = [], action) {
         country: result.country,
         variant: result.variant,
         durations: {
-          [Terms.YEARLY]: prepSection(result.year, result.country.precision),
-          [Terms.MONTHLY]: prepSection(result.month, result.country.precision),
-          [Terms.WEEKLY]: prepSection(result.week, result.country.precision),
-          [Terms.DAILY]: prepSection(result.day, result.country.precision),
-          [Terms.HOURLY]: prepSection(result.hour, result.country.precision),
+          y: prepSection(result.year, result.country.precision),
+          m: prepSection(result.month, result.country.precision),
+          w: prepSection(result.week, result.country.precision),
+          d: prepSection(result.day, result.country.precision),
+          h: prepSection(result.hour, result.country.precision),
         },
       }));
     case MOVE_RESULT_TO_TOP:

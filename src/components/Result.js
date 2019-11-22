@@ -4,12 +4,15 @@ import {View, Text, StyleSheet, Animated, Share} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {TextButton} from 'react-native-material-buttons';
 import {WALLPAPER_LOAD_REQUEST} from '../actionTypes/wallpaper';
-import {createAction, Terms} from '../actions';
+import {createAction} from '../actions';
 import {connect, useDispatch} from 'react-redux';
 import {LOADED} from '../constants/loading.states';
 import Icon from 'react-native-vector-icons/Feather';
 import dynamicLinks from '@react-native-firebase/dynamic-links';
 import Config from 'react-native-config';
+import {Alerter} from './Alerter';
+import slugify from 'slugify';
+import {Terms} from '../models/Calculator';
 
 let backgroundImageOpacity = new Animated.Value(0);
 const fadeIn = () =>
@@ -18,12 +21,6 @@ const fadeIn = () =>
     duration: 600,
     useNativeDriver: true,
   }).start();
-
-const rateSuffix = {
-  [Terms.YEARLY]: '/y',
-  [Terms.DAILY]: '/d',
-  [Terms.HOURLY]: '/h',
-};
 
 function Result({
   id,
@@ -35,45 +32,61 @@ function Result({
   onDelete,
 }) {
   const sections = [
-    {title: 'Year', data: durations[Terms.YEARLY]},
-    {title: 'Month', data: durations[Terms.MONTHLY]},
-    {title: 'Week', data: durations[Terms.WEEKLY]},
-    {title: 'Day', data: durations[Terms.DAILY]},
-    {title: 'Hour', data: durations[Terms.HOURLY]},
+    {title: 'Year', data: durations.y},
+    {title: 'Month', data: durations.m},
+    {title: 'Week', data: durations.w},
+    {title: 'Day', data: durations.d},
+    {title: 'Hour', data: durations.h},
   ];
   const dispatch = useDispatch();
   if (!wallpaperUrl) {
     dispatch(createAction(WALLPAPER_LOAD_REQUEST, id));
   }
 
-  async function share() {
-    const url =
-      Config.SHARE_URI_PREFIX +
-      '?t=' +
-      params.term +
-      '&r=' +
-      params.rate.int +
-      params.rate.float +
-      '&h=' +
-      params.hoursPerDay +
-      '&d=' +
-      params.daysPerWeek +
-      '&l=' +
-      params.annualLeave;
-      console.log(Config);
-    const link = await dynamicLinks().buildShortLink(
-      {
-        link: url,
-        domainUriPrefix: Config.FDL_URI_PREFIX,
-        analytics: {
-          campaign: 'share',
+  async function getShareLink(url) {
+    try {
+      return await dynamicLinks().buildShortLink(
+        {
+          link: url,
+          domainUriPrefix: 'https://' + Config.FDL_DOMAIN,
+          android: {
+            packageName: Config.APPLICATION_ID,
+          },
         },
-      },
-      'SHORT',
+        'SHORT',
+      );
+    } catch (error) {
+      console.log(error);
+      Alerter.error(
+        'Something went wrong',
+        'This is likely to be  a bug - please tell Huy that the share feature is broken. Thanks',
+      );
+    }
+    return '';
+  }
+
+  async function share() {
+    const link = await getShareLink(
+      Config.SHARE_URI_PREFIX +
+        '?c=' +
+        country.id +
+        '&v=' +
+        slugify(variant) +
+        '&t=' +
+        params.term +
+        '&r=' +
+        params.rate.int +
+        params.rate.float +
+        '&h=' +
+        params.hoursPerDay +
+        '&d=' +
+        params.daysPerWeek +
+        '&l=' +
+        params.annualLeave,
     );
 
     let message =
-      'Income Tax Calculator by Huy\n' +
+      (link && link + '\n') +
       country.flag +
       ' ' +
       country.name +
@@ -82,15 +95,16 @@ function Result({
       params.rate.int +
       params.rate.float +
       (country.suffix || '') +
-      rateSuffix[params.term];
+      '/' +
+      params.term;
     if (params.term !== Terms.YEARLY) {
       message +=
         ' = ' +
         (country.prefix || '') +
         durations[Terms.YEARLY].gross.int +
-        (country.suffix || '') +
-        '/y.\n';
+        (country.suffix || '');
     }
+    message += '\n';
     for (const k in durations[Terms.YEARLY].taxes) {
       const tax = durations[Terms.YEARLY].taxes[k];
       message +=
@@ -101,7 +115,7 @@ function Result({
         tax.int +
         tax.float +
         (country.suffix || '') +
-        '/y.\n';
+        '\n';
     }
     message +=
       'Real salary: ' +
@@ -109,12 +123,11 @@ function Result({
       durations[Terms.YEARLY].net.int +
       durations[Terms.YEARLY].net.float +
       (country.suffix || '') +
-      '/y.\nFor more details download ITCH app ' +
-      link;
+      '\nFor more info download ITCH app';
 
     try {
       const result = await Share.share({
-        title: 'ITCH',
+        title: Config.APP_NAME,
         message: message,
       });
 

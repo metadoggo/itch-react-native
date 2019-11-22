@@ -1,7 +1,11 @@
-import {Terms} from '../actions';
-
 const WEEKS_PER_YEAR = 52;
 const MONTH_PER_YEAR = 52;
+
+export const Terms = {
+  HOURLY: 'h',
+  DAILY: 'd',
+  YEARLY: 'y',
+};
 
 const getIncomeTax = (taxBands, grossIncome) => {
   var rem = 0;
@@ -41,10 +45,10 @@ export function getGrossAnnualIncome(
       return rate * workingHoursPerYear;
     case Terms.DAILY:
       return rate * workingDaysPerYear;
-    case Terms.WEEKLY:
-      return rate * WEEKS_PER_YEAR;
-    case Terms.MONTHLY:
-      return rate * MONTH_PER_YEAR;
+    // case Terms.WEEKLY:
+    //   return rate * WEEKS_PER_YEAR;
+    // case Terms.MONTHLY:
+    //   return rate * MONTH_PER_YEAR;
     default:
       return rate;
   }

@@ -42,7 +42,6 @@ target 'itch' do
 
 
   use_native_modules!
-  pod 'CodePush', :path => '../node_modules/react-native-code-push'
 
 end
 

@@ -1,34 +1,52 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Android",
-            "cwd": "${workspaceFolder}",
-            "type": "reactnative",
-            "request": "launch",
-            "platform": "android",
-            "variant": "devDebug",
-            "target": "device"
-        },
-        {
-            "name": "iOS Dev",
-            "cwd": "${workspaceFolder}",
-            "type": "reactnative",
-            "request": "launch",
-            "platform": "ios",
-            "scheme": "dev"
-        },
-        {
-            "name": "iOS Prod",
-            "cwd": "${workspaceFolder}",
-            "type": "reactnative",
-            "request": "launch",
-            "platform": "ios",
-            "scheme": "prod",
-            "target": "simulator"
-        }
-    ]
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "a Dev",
+      "cwd": "${workspaceFolder}",
+      "type": "reactnative",
+      "request": "launch",
+      "platform": "android",
+      "runArguments": [
+        "--appId",
+        "com.su93rheroes.itch.dev",
+        "--variant",
+        "devDebug"
+      ]
+    },
+    {
+      "name": "a Prod",
+      "cwd": "${workspaceFolder}",
+      "type": "reactnative",
+      "request": "launch",
+      "platform": "android",
+      "variant": "prodDebug",
+      "runArguments": [
+        "--variant",
+        "prodDebug"
+      ]
+    },
+    {
+      "name": "i Dev",
+      "cwd": "${workspaceFolder}",
+      "type": "reactnative",
+      "request": "launch",
+      "platform": "ios",
+      "scheme": "dev",
+      "runArguments": ["--configuration", "Prod.Debug"]
+    },
+    {
+      "name": "i Prod Device",
+      "cwd": "${workspaceFolder}",
+      "type": "reactnative",
+      "request": "launch",
+      "platform": "ios",
+      "scheme": "prod",
+      "target": "device",
+      "runArguments": ["--configuration", "Prod.Debug"]
+    }
+  ]
 }

@@ -1,5 +1,6 @@
 [
 	{
+		"id": "UK",
 		"title": "England, Wales & Northen Ireland",
 		"flag": "🇬🇧",
 		"prefix": "£",
@@ -93,6 +94,7 @@
 		]
 	},
 	{
+		"id": "SC",
 		"title": "Scotland",
 		"flag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
 		"prefix": "£",
@@ -148,6 +150,7 @@
 		]
 	},
 	{
+		"id": "FR",
 		"title": "France",
 		"flag": "🇫🇷",
 		"prefix": "£",
@@ -187,6 +190,7 @@
 		]
 	},
 	{
+		"id": "DE",
 		"title": "Germany",
 		"flag": "🇩🇪",
 		"prefix": "£",
@@ -226,6 +230,7 @@
 		]
 	},
 	{
+		"id": "ES",
 		"title": "Spain",
 		"flag": "🇪🇸",
 		"prefix": "£",
@@ -265,6 +270,7 @@
 		]
 	},
 	{
+		"id": "NL",
 		"title": "Netherland",
 		"flag": "🇳🇱",
 		"prefix": "£",
@@ -304,6 +310,7 @@
 		]
 	},
 	{
+		"id": "DK",
 		"title": "Denmark",
 		"flag": "🇩🇰",
 		"prefix": "£",
@@ -343,6 +350,7 @@
 		]
 	},
 	{
+		"id": "SE",
 		"title": "Sweden",
 		"flag": "🇸🇪",
 		"prefix": "£",
@@ -382,6 +390,7 @@
 		]
 	},
 	{
+		"id": "PL",
 		"title": "Poland",
 		"flag": "🇵🇱",
 		"prefix": "£",
@@ -421,6 +430,7 @@
 		]
 	},
 	{
+		"id": "US",
 		"title": "USA",
 		"flag": "🇺🇸",
 		"prefix": "£",
@@ -460,6 +470,7 @@
 		]
 	},
 	{
+		"id": "CA",
 		"title": "Canada/",
 		"flag": "🇨🇦",
 		"prefix": "£",
@@ -499,6 +510,7 @@
 		]
 	},
 	{
+		"id": "IN",
 		"title": "India",
 		"flag": "🇮🇳",
 		"prefix": "£",
@@ -538,6 +550,7 @@
 		]
 	},
 	{
+		"id": "JP",
 		"title": "Japan",
 		"flag": "🇯🇵",
 		"prefix": "£",
@@ -577,6 +590,7 @@
 		]
 	},
 	{
+		"id": "HK",
 		"title": "Hong Kong",
 		"flag": "🇭🇰",
 		"prefix": "£",
@@ -616,6 +630,7 @@
 		]
 	},
 	{
+		"id": "CN",
 		"title": "China",
 		"flag": "🇨🇳",
 		"prefix": "£",
@@ -655,6 +670,7 @@
 		]
 	},
 	{
+		"id": "SG",
 		"title": "Singapore",
 		"flag": "🇸🇬",
 		"prefix": "$",
@@ -718,6 +734,7 @@
 		]
 	},
 	{
+		"id": "VN",
 		"title": "Vietnam",
 		"flag": "🇻🇳",
 		"suffix": " ₫",
@@ -778,6 +795,7 @@
 		]
 	},
 	{
+		"id": "AU",
 		"title": "Australia",
 		"flag": "🇦🇺",
 		"prefix": "$",
