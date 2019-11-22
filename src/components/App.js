@@ -22,6 +22,7 @@ import FormScreen from '../containers/FormScreen';
 import ResultScreen from '../containers/ResultScreen';
 import navigationDebouncer from 'react-navigation-redux-debouncer';
 import {setTopLevelNavigator} from './NavigationService';
+import codePush from 'react-native-code-push';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
@@ -44,7 +45,7 @@ const RootStack = createMaterialBottomTabNavigator(
   },
 );
 
-const AppContainer = createAppContainer(RootStack);
+const AppContainer = createAppContainer(codePush(RootStack));
 
 export default () => (
   <Provider store={store}>

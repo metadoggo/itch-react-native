@@ -209,9 +209,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   modal: {
-    marginBottom: 300,
+    marginBottom: 250,
     backgroundColor: '#ffffff',
-    alignContent: 'center',
+    alignItems: 'center',
   },
   modalTitle: {
     textAlign: 'center',

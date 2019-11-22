@@ -63,3 +63,6 @@ buck-out/
 GoogleService-Info*.plist
 google-services.json
 .env.*
+
+appcenter-config.json
+AppCenter-Config.plist
