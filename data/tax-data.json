@@ -150,435 +150,31 @@
 		]
 	},
 	{
-		"id": "FR",
-		"title": "France",
-		"flag": "🇫🇷",
-		"prefix": "£",
-		"precision": 2,
-		"locale": "en-GB",
-		"currency": "GBP",
-		"years": [
-			{
-				"title": "2019/20",
-				"categories": [
-					{
-						"title": "Income tax",
-						"bands": [
-							{
-								"rate": 0,
-								"limit": 12500
-							},
-							{
-								"rate": 0.19,
-								"limit": 14549
-							},
-							{
-								"rate": 0.2,
-								"limit": 24944
-							},
-							{
-								"rate": 0.41,
-								"limit": 150000
-							},
-							{
-								"rate": 0.46
-							}
-						]
-					}
-				]
-			}
-		]
-	},
-	{
 		"id": "DE",
 		"title": "Germany",
 		"flag": "🇩🇪",
-		"prefix": "£",
+		"prefix": "€",
 		"precision": 2,
-		"locale": "en-GB",
-		"currency": "GBP",
+		"locale": "de-DE",
+		"currency": "EUR",
 		"years": [
 			{
-				"title": "2019/20",
+				"title": "2019",
 				"categories": [
 					{
 						"title": "Income tax",
 						"bands": [
 							{
 								"rate": 0,
-								"limit": 12500
+								"limit": 9168
 							},
 							{
-								"rate": 0.19,
-								"limit": 14549
+								"rate": 0.14,
+								"limit": 55960
 							},
 							{
-								"rate": 0.2,
-								"limit": 24944
-							},
-							{
-								"rate": 0.41,
-								"limit": 150000
-							},
-							{
-								"rate": 0.46
-							}
-						]
-					}
-				]
-			}
-		]
-	},
-	{
-		"id": "ES",
-		"title": "Spain",
-		"flag": "🇪🇸",
-		"prefix": "£",
-		"precision": 2,
-		"locale": "en-GB",
-		"currency": "GBP",
-		"years": [
-			{
-				"title": "2019/20",
-				"categories": [
-					{
-						"title": "Income tax",
-						"bands": [
-							{
-								"rate": 0,
-								"limit": 12500
-							},
-							{
-								"rate": 0.19,
-								"limit": 14549
-							},
-							{
-								"rate": 0.2,
-								"limit": 24944
-							},
-							{
-								"rate": 0.41,
-								"limit": 150000
-							},
-							{
-								"rate": 0.46
-							}
-						]
-					}
-				]
-			}
-		]
-	},
-	{
-		"id": "NL",
-		"title": "Netherland",
-		"flag": "🇳🇱",
-		"prefix": "£",
-		"precision": 2,
-		"locale": "en-GB",
-		"currency": "GBP",
-		"years": [
-			{
-				"title": "2019/20",
-				"categories": [
-					{
-						"title": "Income tax",
-						"bands": [
-							{
-								"rate": 0,
-								"limit": 12500
-							},
-							{
-								"rate": 0.19,
-								"limit": 14549
-							},
-							{
-								"rate": 0.2,
-								"limit": 24944
-							},
-							{
-								"rate": 0.41,
-								"limit": 150000
-							},
-							{
-								"rate": 0.46
-							}
-						]
-					}
-				]
-			}
-		]
-	},
-	{
-		"id": "DK",
-		"title": "Denmark",
-		"flag": "🇩🇰",
-		"prefix": "£",
-		"precision": 2,
-		"locale": "en-GB",
-		"currency": "GBP",
-		"years": [
-			{
-				"title": "2019/20",
-				"categories": [
-					{
-						"title": "Income tax",
-						"bands": [
-							{
-								"rate": 0,
-								"limit": 12500
-							},
-							{
-								"rate": 0.19,
-								"limit": 14549
-							},
-							{
-								"rate": 0.2,
-								"limit": 24944
-							},
-							{
-								"rate": 0.41,
-								"limit": 150000
-							},
-							{
-								"rate": 0.46
-							}
-						]
-					}
-				]
-			}
-		]
-	},
-	{
-		"id": "SE",
-		"title": "Sweden",
-		"flag": "🇸🇪",
-		"prefix": "£",
-		"precision": 2,
-		"locale": "en-GB",
-		"currency": "GBP",
-		"years": [
-			{
-				"title": "2019/20",
-				"categories": [
-					{
-						"title": "Income tax",
-						"bands": [
-							{
-								"rate": 0,
-								"limit": 12500
-							},
-							{
-								"rate": 0.19,
-								"limit": 14549
-							},
-							{
-								"rate": 0.2,
-								"limit": 24944
-							},
-							{
-								"rate": 0.41,
-								"limit": 150000
-							},
-							{
-								"rate": 0.46
-							}
-						]
-					}
-				]
-			}
-		]
-	},
-	{
-		"id": "PL",
-		"title": "Poland",
-		"flag": "🇵🇱",
-		"prefix": "£",
-		"precision": 2,
-		"locale": "en-GB",
-		"currency": "GBP",
-		"years": [
-			{
-				"title": "2019/20",
-				"categories": [
-					{
-						"title": "Income tax",
-						"bands": [
-							{
-								"rate": 0,
-								"limit": 12500
-							},
-							{
-								"rate": 0.19,
-								"limit": 14549
-							},
-							{
-								"rate": 0.2,
-								"limit": 24944
-							},
-							{
-								"rate": 0.41,
-								"limit": 150000
-							},
-							{
-								"rate": 0.46
-							}
-						]
-					}
-				]
-			}
-		]
-	},
-	{
-		"id": "US",
-		"title": "USA",
-		"flag": "🇺🇸",
-		"prefix": "£",
-		"precision": 2,
-		"locale": "en-GB",
-		"currency": "GBP",
-		"years": [
-			{
-				"title": "2019/20",
-				"categories": [
-					{
-						"title": "Income tax",
-						"bands": [
-							{
-								"rate": 0,
-								"limit": 12500
-							},
-							{
-								"rate": 0.19,
-								"limit": 14549
-							},
-							{
-								"rate": 0.2,
-								"limit": 24944
-							},
-							{
-								"rate": 0.41,
-								"limit": 150000
-							},
-							{
-								"rate": 0.46
-							}
-						]
-					}
-				]
-			}
-		]
-	},
-	{
-		"id": "CA",
-		"title": "Canada/",
-		"flag": "🇨🇦",
-		"prefix": "£",
-		"precision": 2,
-		"locale": "en-GB",
-		"currency": "GBP",
-		"years": [
-			{
-				"title": "2019/20",
-				"categories": [
-					{
-						"title": "Income tax",
-						"bands": [
-							{
-								"rate": 0,
-								"limit": 12500
-							},
-							{
-								"rate": 0.19,
-								"limit": 14549
-							},
-							{
-								"rate": 0.2,
-								"limit": 24944
-							},
-							{
-								"rate": 0.41,
-								"limit": 150000
-							},
-							{
-								"rate": 0.46
-							}
-						]
-					}
-				]
-			}
-		]
-	},
-	{
-		"id": "IN",
-		"title": "India",
-		"flag": "🇮🇳",
-		"prefix": "£",
-		"precision": 2,
-		"locale": "en-GB",
-		"currency": "GBP",
-		"years": [
-			{
-				"title": "2019/20",
-				"categories": [
-					{
-						"title": "Income tax",
-						"bands": [
-							{
-								"rate": 0,
-								"limit": 12500
-							},
-							{
-								"rate": 0.19,
-								"limit": 14549
-							},
-							{
-								"rate": 0.2,
-								"limit": 24944
-							},
-							{
-								"rate": 0.41,
-								"limit": 150000
-							},
-							{
-								"rate": 0.46
-							}
-						]
-					}
-				]
-			}
-		]
-	},
-	{
-		"id": "JP",
-		"title": "Japan",
-		"flag": "🇯🇵",
-		"prefix": "£",
-		"precision": 2,
-		"locale": "en-GB",
-		"currency": "GBP",
-		"years": [
-			{
-				"title": "2019/20",
-				"categories": [
-					{
-						"title": "Income tax",
-						"bands": [
-							{
-								"rate": 0,
-								"limit": 12500
-							},
-							{
-								"rate": 0.19,
-								"limit": 14549
-							},
-							{
-								"rate": 0.2,
-								"limit": 24944
-							},
-							{
-								"rate": 0.41,
-								"limit": 150000
+								"rate": 0.42,
+								"limit": 265328
 							},
 							{
 								"rate": 0.46
@@ -593,75 +189,35 @@
 		"id": "HK",
 		"title": "Hong Kong",
 		"flag": "🇭🇰",
-		"prefix": "£",
+		"prefix": "$",
 		"precision": 2,
-		"locale": "en-GB",
-		"currency": "GBP",
+		"locale": "zh-HK",
+		"currency": "HKD",
 		"years": [
 			{
-				"title": "2019/20",
+				"title": "For individuals",
 				"categories": [
 					{
 						"title": "Income tax",
 						"bands": [
 							{
-								"rate": 0,
-								"limit": 12500
+								"rate": 0.02,
+								"limit": 50000
 							},
 							{
-								"rate": 0.19,
-								"limit": 14549
+								"rate": 0.06,
+								"limit": 100000
 							},
 							{
-								"rate": 0.2,
-								"limit": 24944
-							},
-							{
-								"rate": 0.41,
+								"rate": 0.1,
 								"limit": 150000
 							},
 							{
-								"rate": 0.46
-							}
-						]
-					}
-				]
-			}
-		]
-	},
-	{
-		"id": "CN",
-		"title": "China",
-		"flag": "🇨🇳",
-		"prefix": "£",
-		"precision": 2,
-		"locale": "en-GB",
-		"currency": "GBP",
-		"years": [
-			{
-				"title": "2019/20",
-				"categories": [
-					{
-						"title": "Income tax",
-						"bands": [
-							{
-								"rate": 0,
-								"limit": 12500
+								"rate": 0.14,
+								"limit": 299999
 							},
 							{
-								"rate": 0.19,
-								"limit": 14549
-							},
-							{
-								"rate": 0.2,
-								"limit": 24944
-							},
-							{
-								"rate": 0.41,
-								"limit": 150000
-							},
-							{
-								"rate": 0.46
+								"rate": 0.17
 							}
 						]
 					}
